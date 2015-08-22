@@ -1,0 +1,66 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+android {
+  compileSdkVersion configCompileSdkVersion
+  buildToolsVersion configBuildToolsVersion
+
+  defaultConfig {
+    minSdkVersion 15
+    targetSdkVersion configTargetSdkVersion
+    versionCode 1
+    versionName project.version
+
+    testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled true
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+
+  resourcePrefix 'lib_'
+
+  testBuildType "debug"
+}
+
+dependencies {
+  compile support.appCompat
+
+  testCompile junit
+  testCompile assertJCore
+
+  androidTestCompile junit
+  androidTestCompile espressoCore
+}
+
+tasks.withType(JavaCompile) {
+  options.compilerArgs << "-Xlint:unchecked"
+  options.compilerArgs << "-Xlint:deprecation"
+}
+
+task androidSourcesJar(type: Jar) {
+  classifier = 'sources'
+  from android.sourceSets.main.java.srcDirs
+}
+
+artifacts {
+  archives androidSourcesJar
+}
+
+uploadArchives {
+  dependsOn 'testDebugUnitTest'
+  repositories {
+    mavenDeployer {
+      pom {
+        groupId = 'com.devinci.lib'
+        artifactId = 'android'
+        version = android.defaultConfig.versionName
+      }
+      repository(url: 'file://' + new File(System.getProperty('user.home'),
+          '.m2/repository').absolutePath)
+    }
+  }
+}
