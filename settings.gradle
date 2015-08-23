@@ -1,2 +1,4 @@
 include ':lib-android'
+include ':lib-android-common'
+include ':lib-android-crashlytics'
 include ':sample'

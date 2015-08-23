@@ -24,9 +24,15 @@ ext {
   configBuildToolsVersion = '23'
   configTargetSdkVersion = 23
 
+  support = [appCompat  : 'com.android.support:appcompat-v7:23.0.0',
+             annotations: 'com.android.support:support-annotations:23.0.0']
+
+  crashlytics = 'com.crashlytics.sdk.android:crashlytics:2.3.2@aar'
+  dagger = [dagger  : 'com.google.dagger:dagger:2.0.1',
+            compiler: 'com.google.dagger:dagger-compiler:2.0.1']
+
   junit = 'junit:junit:4.12'
   assertJCore = 'org.assertj:assertj-core:2.1.0'
-  support = [appCompat: 'com.android.support:appcompat-v7:23.0.0']
 
   espressoCore = 'com.android.support.test.espresso:espresso-core:2.2'
 }
