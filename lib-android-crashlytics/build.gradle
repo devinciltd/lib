@@ -1,6 +1,12 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
 
+allprojects {
+  repositories {
+    maven { url 'https://maven.fabric.io/public' }
+  }
+}
+
 android {
   compileSdkVersion configCompileSdkVersion
   buildToolsVersion configBuildToolsVersion
@@ -26,17 +32,13 @@ android {
 }
 
 dependencies {
-  compile project(':lib-android-common')
-
-  compile support.appCompat
+  provided project(':lib-android-common')
   provided support.annotations
   provided dagger.dagger
 
-  testCompile junit
-  testCompile assertJCore
-
-  androidTestCompile junit
-  androidTestCompile espressoCore
+  compile(rootProject.ext.crashlytics) {
+    transitive = true;
+  }
 }
 
 tasks.withType(JavaCompile) {
@@ -59,7 +61,7 @@ uploadArchives {
     mavenDeployer {
       pom {
         groupId = 'com.devinci.lib'
-        artifactId = 'android'
+        artifactId = 'android-crashlytics'
         version = android.defaultConfig.versionName
       }
       repository(url: 'file://' + new File(System.getProperty('user.home'),

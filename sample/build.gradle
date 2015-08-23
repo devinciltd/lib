@@ -32,4 +32,5 @@ dependencies {
   compile project(':lib-android')
 
   compile support.appCompat
+  compile dagger.dagger
 }

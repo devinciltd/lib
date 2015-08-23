@@ -26,17 +26,8 @@ android {
 }
 
 dependencies {
-  compile project(':lib-android-common')
-
-  compile support.appCompat
   provided support.annotations
   provided dagger.dagger
-
-  testCompile junit
-  testCompile assertJCore
-
-  androidTestCompile junit
-  androidTestCompile espressoCore
 }
 
 tasks.withType(JavaCompile) {
@@ -59,7 +50,7 @@ uploadArchives {
     mavenDeployer {
       pom {
         groupId = 'com.devinci.lib'
-        artifactId = 'android'
+        artifactId = 'android-common'
         version = android.defaultConfig.versionName
       }
       repository(url: 'file://' + new File(System.getProperty('user.home'),
