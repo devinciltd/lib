@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
 
+import static com.devinci.lib.util.Preconditions.checkNotNull;
+
 /**
  * Crash reporting with Crashlytics.
  * <p>
@@ -36,6 +38,7 @@ public class CrashlyticsCrashReporting implements CrashReporting {
   private boolean initialized;
 
   @Override public void initialize(@NonNull Context context) {
+    checkNotNull(context);
     if (!initialized) {
       Fabric.with(context, new Crashlytics());
       initialized = true;

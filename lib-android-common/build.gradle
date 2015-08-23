@@ -10,8 +10,6 @@ android {
     targetSdkVersion configTargetSdkVersion
     versionCode 1
     versionName project.version
-
-    testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
   }
 
   buildTypes {
@@ -21,8 +19,6 @@ android {
   }
 
   resourcePrefix 'lib_'
-
-  testBuildType "debug"
 }
 
 dependencies {
