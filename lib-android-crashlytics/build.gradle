@@ -3,10 +3,8 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 project.archivesBaseName = 'android-crashlytics'
 
-allprojects {
-  repositories {
-    maven { url 'https://maven.fabric.io/public' }
-  }
+repositories {
+  maven { url 'https://maven.fabric.io/public' }
 }
 
 android {
@@ -35,13 +33,14 @@ android {
 }
 
 dependencies {
+  compile(rootProject.ext.crashlytics) {
+    transitive = true
+  }
+
   provided project(':lib-android-common')
   provided support.annotations
   provided dagger.dagger
 
-  compile(rootProject.ext.crashlytics) {
-    transitive = true
-  }
 }
 
 tasks.withType(JavaCompile) {
