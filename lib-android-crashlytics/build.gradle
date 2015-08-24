@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
+apply plugin: 'com.github.dcendents.android-maven'
+
+project.archivesBaseName = 'android-crashlytics'
 
 allprojects {
   repositories {
@@ -54,19 +56,4 @@ task androidSourcesJar(type: Jar) {
 
 artifacts {
   archives androidSourcesJar
-}
-
-uploadArchives {
-  dependsOn 'testDebugUnitTest'
-  repositories {
-    mavenDeployer {
-      pom {
-        groupId = 'com.devinci.lib'
-        artifactId = 'android-crashlytics'
-        version = android.defaultConfig.versionName
-      }
-      repository(url: 'file://' + new File(System.getProperty('user.home'),
-          '.m2/repository').absolutePath)
-    }
-  }
 }
