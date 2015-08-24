@@ -23,6 +23,11 @@ android {
   resourcePrefix 'lib_'
 
   testBuildType "debug"
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_7
+    targetCompatibility JavaVersion.VERSION_1_7
+  }
 }
 
 dependencies {
