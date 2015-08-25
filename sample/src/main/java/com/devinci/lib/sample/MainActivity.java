@@ -5,8 +5,9 @@ import android.support.annotation.NonNull;
 import com.devinci.lib.activity.BaseActivity;
 import com.devinci.lib.dagger.Components;
 import com.devinci.lib.dagger.HasComponent;
-import com.devinci.lib.dagger.module.ActivityModule;
 import com.devinci.lib.sample.app.AppComponent;
+
+import static com.devinci.lib.dagger.module.ActivityModule.from;
 
 public class MainActivity extends BaseActivity implements HasComponent<MainActivityComponent> {
 
@@ -18,7 +19,7 @@ public class MainActivity extends BaseActivity implements HasComponent<MainActiv
 
     mainActivityComponent = DaggerMainActivityComponent.builder()
         .appComponent(Components.<AppComponent>fromContext(this))
-        .activityModule(ActivityModule.from(this))
+        .activityModule(from(this))
         .build()
         .inject(this)
         .getComponent();
