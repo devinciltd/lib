@@ -1,5 +1,6 @@
 package com.devinci.lib.app;
 
+import com.devinci.lib.activity.BaseActivity;
 import com.devinci.lib.crash.CrashReporting;
 import com.devinci.lib.dagger.module.FakeCrashReportingModule;
 import dagger.Component;
@@ -16,4 +17,6 @@ import javax.inject.Singleton;
 }) public interface BaseComponent {
 
   CrashReporting crashReporting();
+
+  void inject(BaseActivity activity);
 }
