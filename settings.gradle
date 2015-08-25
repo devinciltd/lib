@@ -2,3 +2,5 @@ include ':lib-android'
 include ':lib-android-common'
 include ':lib-android-crashlytics'
 include ':sample'
+
+rootProject.name = 'com.devinci.lib'

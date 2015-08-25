@@ -4,6 +4,7 @@ buildscript {
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:1.3.0'
+    classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
   }
 }
 
@@ -24,10 +25,12 @@ ext {
   configBuildToolsVersion = '23'
   configTargetSdkVersion = 23
 
-  support = [appCompat  : 'com.android.support:appcompat-v7:23.0.0',
-             annotations: 'com.android.support:support-annotations:23.0.0']
+  supportVersion = '23.0.0'
 
-  crashlytics = 'com.crashlytics.sdk.android:crashlytics:2.3.2@aar'
+  support = [appCompat  : "com.android.support:appcompat-v7:$supportVersion",
+             annotations: "com.android.support:support-annotations:$supportVersion"]
+
+  crashlytics = 'com.crashlytics.sdk.android:crashlytics:2.5.1@aar'
   dagger = [dagger  : 'com.google.dagger:dagger:2.0.1',
             compiler: 'com.google.dagger:dagger-compiler:2.0.1']
 

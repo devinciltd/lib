@@ -1,10 +1,10 @@
 apply plugin: 'com.android.library'
-apply plugin: 'maven'
+apply plugin: 'com.github.dcendents.android-maven'
 
-allprojects {
-  repositories {
-    maven { url 'https://maven.fabric.io/public' }
-  }
+project.archivesBaseName = 'android-crashlytics'
+
+repositories {
+  maven { url 'https://maven.fabric.io/public' }
 }
 
 android {
@@ -28,13 +28,13 @@ android {
 }
 
 dependencies {
-  provided project(':lib-android-common')
-  provided support.annotations
-  provided dagger.dagger
-
   compile(rootProject.ext.crashlytics) {
     transitive = true
   }
+
+  provided project(':lib-android-common')
+  provided support.annotations
+  provided dagger.dagger
 }
 
 tasks.withType(JavaCompile) {
@@ -49,19 +49,4 @@ task androidSourcesJar(type: Jar) {
 
 artifacts {
   archives androidSourcesJar
-}
-
-uploadArchives {
-  dependsOn 'testDebugUnitTest'
-  repositories {
-    mavenDeployer {
-      pom {
-        groupId = 'com.devinci.lib'
-        artifactId = 'android-crashlytics'
-        version = android.defaultConfig.versionName
-      }
-      repository(url: 'file://' + new File(System.getProperty('user.home'),
-          '.m2/repository').absolutePath)
-    }
-  }
 }
