@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'android-apt'
 
 project.archivesBaseName = 'android'
 
@@ -33,6 +34,8 @@ dependencies {
   compile support.appCompat
   provided support.annotations
   provided dagger.dagger
+  apt dagger.compiler
+  provided jsr205
 
   testCompile junit
   testCompile assertJCore

@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
 
 android {
   compileSdkVersion configCompileSdkVersion
@@ -33,4 +34,6 @@ dependencies {
 
   compile support.appCompat
   compile dagger.dagger
+  apt dagger.compiler
+  provided jsr205
 }
