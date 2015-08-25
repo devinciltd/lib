@@ -8,7 +8,8 @@ android:
   - extra-google-m2repository
   - extra-android-m2repository
   - addon-google_apis-google-19
-script: "./gradlew build"
+script: ./gradlew build
+after_success: ./gradlew coveralls
 notifications:
   slack:
     secure: MfBl86Iy3k9xnm/ErHFyN3qMsqu05ojkh27wZsDI9WppDbw7aetvj9mJSol8j2s8I6oW6seccrBvqvsgftBuK8uQP4fHUW9ew9f+/9jnjFuxDXuMtVUtbcRJJ3+Z1i6R7c7aS7aVyGjDE0d6oER7f99w+ZvjKB4s1JjQdHS9RixjEV8V326B7Kh10dCnkXPjDDUSmzJa+O+DBqDzjdOEYOsRNFGwOhHA97dAiHexFYtwNnKk+VSWgXiZXCT2Vm3xlA7E7IKAcMdPVjAR8oEYheY+VcYKxCoDVfPig6d+pPo3T3X9sA56XVSHf//aWvbY9CGptl1oyZJmjlVDc03ykEog3YI/cDFwE7thXDy9La5rFpVaKEM8b8/920/8NBwdH8hnOIQZhWge2GiSE7oVs6GM93j2eo9sWE+ZEe3fGVatRXcfy2J9CwaqsaDcBBOdnoMtUw/Xx9qLute9TNjXMn9lUhyvJALGRK4ohZzYR9McrIaqUsuJoaGWD9PTkB76nzcyPMbL5pJIGwFxVH/eN09l510CddUwLGTBIJ26in9kqOA+rZ8xQToxvuWcJpONSMNnmjBf72x8t4RIaAWjLekkmQkJIzWHBF5c1BnUQwnFhls2Af9Yvd/WqszBCBuWroCK0O8v+RA54Yl7ZgFAoSn1pbC1eiR6WxPtfgK7PfA=
