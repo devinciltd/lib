@@ -30,7 +30,7 @@ ext {
   support = [appCompat  : "com.android.support:appcompat-v7:$supportVersion",
              annotations: "com.android.support:support-annotations:$supportVersion"]
 
-  crashlytics = 'com.crashlytics.sdk.android:crashlytics:2.3.2@aar'
+  crashlytics = 'com.crashlytics.sdk.android:crashlytics:2.5.1@aar'
   dagger = [dagger  : 'com.google.dagger:dagger:2.0.1',
             compiler: 'com.google.dagger:dagger-compiler:2.0.1']
 
