@@ -35,7 +35,6 @@ dependencies {
   provided project(':lib-android-common')
   provided support.annotations
   provided dagger.dagger
-
 }
 
 tasks.withType(JavaCompile) {
