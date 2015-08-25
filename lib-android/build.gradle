@@ -37,8 +37,10 @@ dependencies {
   apt dagger.compiler
   provided jsr205
 
-  testCompile junit
   testCompile assertJCore
+  testCompile junit
+  testCompile mockitoCore
+  testCompile robolectric
 
   androidTestCompile junit
   androidTestCompile espressoCore
