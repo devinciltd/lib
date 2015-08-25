@@ -2,8 +2,9 @@ package com.devinci.lib.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import com.devinci.lib.app.BaseApplication;
+import com.devinci.lib.app.BaseComponent;
 import com.devinci.lib.crash.CrashReporting;
+import com.devinci.lib.dagger.Components;
 import javax.inject.Inject;
 
 /**
@@ -15,6 +16,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
   @Override protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    ((BaseApplication) getApplication()).getBaseComponent().inject(this);
+    Components.<BaseComponent>fromContext(this).inject(this);
   }
 }
