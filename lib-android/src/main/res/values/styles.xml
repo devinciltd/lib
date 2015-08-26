@@ -17,4 +17,12 @@
 
   <style name="lib_Theme.Light.NoActionBar"
       parent="lib_Base.Theme.Light.NoActionBar"/>
+
+  <style name="lib_Base.Toolbar"
+      parent="">
+    <item name="android:background">?attr/colorPrimary</item>
+  </style>
+
+  <style name="lib_Toolbar"
+      parent="lib_Base.Toolbar"/>
 </resources>

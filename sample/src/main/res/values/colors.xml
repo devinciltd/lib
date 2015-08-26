@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+  <!-- TODO use material colors from lib -->
+  <color name="primary">#3F51B5</color>
+  <color name="primary_dim">#7986CB</color>
+  <color name="primary_dark">#303F9F</color>
+  <color name="accent">#FFC107</color>
+  <color name="accent_dim">#FFE082</color>
+</resources>

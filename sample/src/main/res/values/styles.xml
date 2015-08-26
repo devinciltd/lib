@@ -4,6 +4,9 @@
 
   <style name="Base.Theme.Sample"
       parent="lib_Theme.Light.NoActionBar">
+    <item name="colorPrimary">@color/primary</item>
+    <item name="colorPrimaryDark">@color/primary_dark</item>
+    <item name="colorAccent">@color/accent</item>
   </style>
 
   <style name="Theme.Sample"
