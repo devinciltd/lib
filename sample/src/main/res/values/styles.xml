@@ -1,6 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
 
-  <style name="AppTheme"
-      parent="Theme.AppCompat.Light.DarkActionBar">
+  <style name="Base.Theme.Sample"
+      parent="lib_Theme.Light.NoActionBar">
   </style>
+
+  <style name="Theme.Sample"
+      parent="Base.Theme.Sample"/>
 </resources>

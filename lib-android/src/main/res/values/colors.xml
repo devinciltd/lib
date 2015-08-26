@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+  <color name="lib_transparent">#00000000</color>
+  <color name="lib_white">#FFFFFFFF</color>
+  <color name="lib_black">#FF000000</color>
+</resources>
