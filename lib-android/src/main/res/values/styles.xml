@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+  <style name="lib_Base.Theme.Light.NoActionBar"
+      parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="android:windowBackground">@color/lib_white</item>
+
+    <!-- Hide old action bar, activities should request Window.FEATURE_ACTION_BAR to show it.
+         The old action bar is replaced by Toolbar so this flag should not be set to true -->
+    <item name="windowActionBar">false</item>
+    <item name="android:windowActionBar">false</item>
+    <!-- AppCompat does not support windowNoTitle set to false -->
+    <item name="windowNoTitle">true</item>
+    <item name="android:windowNoTitle">true</item>
+  </style>
+
+  <style name="lib_Theme.Light.NoActionBar"
+      parent="lib_Base.Theme.Light.NoActionBar"/>
+</resources>
