@@ -2,11 +2,13 @@ package com.devinci.lib.app;
 
 import android.app.Application;
 import android.support.annotation.NonNull;
+import com.devinci.lib.dagger.HasComponent;
 
 /**
  * Base application with global state.
  */
-public abstract class BaseApplication<T extends BaseComponent> extends Application {
+public abstract class BaseApplication<T extends BaseComponent> extends Application implements
+    HasComponent<T> {
 
   private T baseComponent;
 
@@ -18,7 +20,7 @@ public abstract class BaseApplication<T extends BaseComponent> extends Applicati
 
   @NonNull protected abstract T createBaseComponent();
 
-  @NonNull public T getBaseComponent() {
+  @NonNull @Override public T getComponent() {
     return baseComponent;
   }
 }
