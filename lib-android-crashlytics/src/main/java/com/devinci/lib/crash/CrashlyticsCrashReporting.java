@@ -38,13 +38,12 @@ public class CrashlyticsCrashReporting implements CrashReporting {
   private boolean initialized;
 
   @Override public void initialize(@NonNull Context context) {
-    checkNotNull(context);
-    if (!initialized) {
-      Fabric.with(context, new Crashlytics());
-      initialized = true;
-    } else {
+    if (initialized) {
       throw new IllegalStateException("Crashlytics already initialized");
     }
+    checkNotNull(context);
+    Fabric.with(context, new Crashlytics());
+    initialized = true;
   }
 
   @Override public void sendException(@NonNull Throwable throwable) {
