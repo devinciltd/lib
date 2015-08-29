@@ -10,7 +10,9 @@
   </style>
 
   <style name="Theme.Sample"
-      parent="Base.Theme.Sample"/>
+      parent="Base.Theme.Sample">
+    <item name="lib_iconTabLayoutStyle">@style/Widget.Sample.TabLayout</item>
+  </style>
 
   <style name="Widget.Sample.TabLayout"
       parent="Widget.Design.TabLayout">
