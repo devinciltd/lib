@@ -11,4 +11,9 @@
 
   <style name="Theme.Sample"
       parent="Base.Theme.Sample"/>
+
+  <style name="Widget.Sample.TabLayout"
+      parent="Widget.Design.TabLayout">
+    <item name="tabSelectedTextColor">@color/lib_white</item>
+  </style>
 </resources>

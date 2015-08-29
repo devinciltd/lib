@@ -29,7 +29,8 @@ ext {
   supportVersion = '23.0.0'
 
   support = [appCompat  : "com.android.support:appcompat-v7:$supportVersion",
-             annotations: "com.android.support:support-annotations:$supportVersion"]
+             annotations: "com.android.support:support-annotations:$supportVersion",
+             design     : "com.android.support:design:$supportVersion"]
 
   crashlytics = 'com.crashlytics.sdk.android:crashlytics:2.5.1@aar'
   dagger = [dagger  : 'com.google.dagger:dagger:2.0.1',

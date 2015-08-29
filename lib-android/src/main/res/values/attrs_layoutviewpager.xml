@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <declare-styleable name="lib_LayoutViewPager.LayoutParams">
+    <attr name="lib_pageIcon"
+        format="reference"/>
+    <attr name="lib_pageTitle"
+        format="string"/>
+  </declare-styleable>
+</resources>
