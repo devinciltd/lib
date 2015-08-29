@@ -13,18 +13,12 @@ plugins {
   id 'pl.allegro.tech.build.axion-release' version '1.3.1'
 }
 
-allprojects {
-  repositories {
-    jcenter()
-  }
-
-  project.version = scmVersion.version
-}
-
 ext {
   configCompileSdkVersion = 23
   configBuildToolsVersion = '23'
   configTargetSdkVersion = 23
+
+  addJacoco = 'gradle/jacoco.gradle'
 
   supportVersion = '23.0.0'
 
@@ -43,4 +37,14 @@ ext {
   robolectric = 'org.robolectric:robolectric:3.0'
 
   espressoCore = 'com.android.support.test.espresso:espresso-core:2.2'
+}
+
+allprojects {
+  repositories {
+    jcenter()
+  }
+
+  apply from: rootProject.file(addJacoco)
+
+  project.version = scmVersion.version
 }
