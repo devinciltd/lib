@@ -5,7 +5,11 @@ task jacocoTestReport(type: JacocoReport) {
   description = "Generate Jacoco coverage reports"
 
   classDirectories = fileTree(dir: "${buildDir}/intermediates/classes/debug",
-      excludes: ['**/R.class',
+      excludes: ['**/*_MembersInjector.class',
+                 '**/Dagger*Component.class',
+                 '**/Dagger*Component$Builder.class',
+                 '**/*Module_*Factory.class',
+                 '**/R.class',
                  '**/R$*.class',
                  '**/*$ViewInjector*.*',
                  '**/BuildConfig.*',
