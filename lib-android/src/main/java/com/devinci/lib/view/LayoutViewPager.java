@@ -1,7 +1,6 @@
 package com.devinci.lib.view;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
@@ -59,12 +58,9 @@ public class LayoutViewPager extends ViewPager {
     }
 
     @Nullable public Drawable getPageIcon(int position) {
-      try {
-        return ResourcesCompat.getDrawable(getResources(),
-            ((LayoutParams) getChildAt(position).getLayoutParams()).pageIconResId, null);
-      } catch (Resources.NotFoundException e) {
-        return null;
-      }
+      int pageIconResId = ((LayoutParams) getChildAt(position).getLayoutParams()).pageIconResId;
+      return pageIconResId == 0 ? null
+          : ResourcesCompat.getDrawable(getResources(), pageIconResId, null);
     }
   }
 
