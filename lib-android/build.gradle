@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'android-apt'
+apply from: rootProject.file(addJacoco)
 
 project.archivesBaseName = 'android'
 
