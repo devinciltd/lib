@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+apply from: rootProject.file(addJacoco)
 
 android {
   compileSdkVersion configCompileSdkVersion
