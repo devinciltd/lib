@@ -15,7 +15,8 @@
   </style>
 
   <style name="Widget.Sample.TabLayout"
-      parent="Widget.Design.TabLayout">
+      parent="lib_IconTabLayout">
     <item name="tabSelectedTextColor">@color/lib_white</item>
+    <item name="lib_pageTitlesVisible">true</item>
   </style>
 </resources>
