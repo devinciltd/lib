@@ -13,21 +13,11 @@ public final class ToolbarUtils {
     checkNotNull(toolbar);
     checkNotNull(viewPager);
 
-    viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-
-      public boolean shouldNotifyInitially = true;
-
-      @Override
-      public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        if (shouldNotifyInitially) {
-          onPageSelected(position);
-          shouldNotifyInitially = false;
-        }
-      }
-
-      @Override public void onPageSelected(int position) {
-        toolbar.setTitle(viewPager.getAdapter().getPageTitle(position));
-      }
-    });
+    viewPager.addOnPageChangeListener(
+        new InitiallyNotifyingOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+          @Override public void onPageSelected(int position) {
+            toolbar.setTitle(viewPager.getAdapter().getPageTitle(position));
+          }
+        }));
   }
 }
