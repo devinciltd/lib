@@ -32,6 +32,7 @@ dependencies {
   compile project(':lib-android-common')
 
   compile support.appCompat
+  compile support.design
   provided support.annotations
   provided dagger.dagger
   apt dagger.compiler
