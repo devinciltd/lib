@@ -9,14 +9,14 @@ import android.view.ViewGroup;
 
 import static com.devinci.lib.util.Preconditions.checkNotNull;
 
-class TitleErasingPagerAdapter extends PagerAdapter {
+class TitleNullifyingPagerAdapter extends PagerAdapter {
   private final PagerAdapter delegate;
 
-  @NonNull public static PagerAdapter from(@NonNull PagerAdapter adapter) {
-    return new TitleErasingPagerAdapter(adapter);
+  @NonNull public static TitleNullifyingPagerAdapter from(@NonNull PagerAdapter adapter) {
+    return new TitleNullifyingPagerAdapter(adapter);
   }
 
-  private TitleErasingPagerAdapter(@NonNull PagerAdapter adapter) {
+  private TitleNullifyingPagerAdapter(@NonNull PagerAdapter adapter) {
     this.delegate = checkNotNull(adapter);
   }
 

@@ -37,7 +37,7 @@ public class IconTabLayout extends TabLayout {
 
   @Override public void setTabsFromPagerAdapter(@NonNull PagerAdapter adapter) {
     super.setTabsFromPagerAdapter(
-        pageTitlesVisible ? adapter : TitleErasingPagerAdapter.from(adapter));
+        pageTitlesVisible ? adapter : TitleNullifyingPagerAdapter.from(adapter));
 
     if (isLayoutPagerAdapterInstance(adapter)) {
       setTabIconsFromLayoutPagerAdapter((LayoutViewPager.LayoutPagerAdapter) adapter);
