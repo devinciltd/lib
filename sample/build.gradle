@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
   compileSdkVersion configCompileSdkVersion
@@ -26,6 +27,11 @@ android {
       applicationIdSuffix ".debug"
       versionNameSuffix "-debug"
     }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
   }
 }
 

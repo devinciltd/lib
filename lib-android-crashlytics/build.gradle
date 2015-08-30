@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'me.tatarka.retrolambda'
 
 project.archivesBaseName = 'android-crashlytics'
 
@@ -22,6 +23,11 @@ android {
     release {
       minifyEnabled false
     }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
   }
 
   resourcePrefix 'lib_'
