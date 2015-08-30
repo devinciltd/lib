@@ -11,6 +11,8 @@
       android:layout_height="wrap_content"
       >
 
+    <include layout="@layout/lib_toolbar_no_elevation"/>
+
     <com.devinci.lib.view.IconTabLayout
         android:id="@+id/icon_tab_layout"
         android:layout_width="match_parent"
@@ -29,6 +31,7 @@
         android:layout_height="wrap_content"
         android:text="@string/first_page"
         app:lib_pageIcon="@drawable/page_icon"
+        app:lib_pageTitle="@string/first_page"
         />
     <TextView
         android:layout_width="wrap_content"

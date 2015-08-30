@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <declare-styleable name="lib_IconTabLayout">
+    <attr name="lib_iconTabLayoutStyle"
+        format="reference"/>
+    <attr name="lib_pageTitlesVisible"
+        format="boolean"/>
+  </declare-styleable>
+</resources>

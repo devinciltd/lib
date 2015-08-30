@@ -25,4 +25,7 @@
 
   <style name="lib_Toolbar"
       parent="lib_Base.Toolbar"/>
+
+  <style name="lib_Toolbar.NoElevation"
+      parent="lib_Base.Toolbar"/>
 </resources>

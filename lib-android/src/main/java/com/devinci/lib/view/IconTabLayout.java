@@ -1,17 +1,18 @@
 package com.devinci.lib.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import com.devinci.lib.R;
 
 public class IconTabLayout extends TabLayout {
+  private final boolean pageTitlesVisible;
+
   public IconTabLayout(Context context) {
     this(context, null);
   }
@@ -22,10 +23,21 @@ public class IconTabLayout extends TabLayout {
 
   public IconTabLayout(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
+
+    TypedArray typedArray =
+        context.obtainStyledAttributes(attrs, R.styleable.lib_IconTabLayout, defStyleAttr,
+            R.style.lib_IconTabLayout);
+    try {
+      pageTitlesVisible =
+          typedArray.getBoolean(R.styleable.lib_IconTabLayout_lib_pageTitlesVisible, true);
+    } finally {
+      typedArray.recycle();
+    }
   }
 
   @Override public void setTabsFromPagerAdapter(@NonNull PagerAdapter adapter) {
-    super.setTabsFromPagerAdapter(adapter);
+    super.setTabsFromPagerAdapter(
+        pageTitlesVisible ? adapter : TitleNullifyingPagerAdapter.from(adapter));
 
     if (isLayoutPagerAdapterInstance(adapter)) {
       setTabIconsFromLayoutPagerAdapter((LayoutViewPager.LayoutPagerAdapter) adapter);

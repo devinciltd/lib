@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <declare-styleable name="lib_IconTabLayout">
-    <attr name="lib_iconTabLayoutStyle"
-        format="reference"/>
-  </declare-styleable>
 
   <declare-styleable name="lib_LayoutViewPager.LayoutParams">
     <attr name="lib_pageIcon"
