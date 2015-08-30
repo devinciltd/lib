@@ -21,7 +21,7 @@ class InitiallyNotifyingOnPageChangeListener implements ViewPager.OnPageChangeLi
     delegate.onPageScrolled(position, positionOffset, positionOffsetPixels);
 
     if (shouldNotifyInitially) {
-      delegate.onPageSelected(position);
+      onPageSelected(position);
       shouldNotifyInitially = false;
     }
   }
