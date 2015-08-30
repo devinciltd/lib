@@ -11,11 +11,7 @@
       android:layout_height="wrap_content"
       >
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        />
+    <include layout="@layout/lib_toolbar_no_elevation"/>
 
     <com.devinci.lib.view.IconTabLayout
         android:id="@+id/icon_tab_layout"

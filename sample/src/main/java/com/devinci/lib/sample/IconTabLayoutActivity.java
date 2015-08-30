@@ -14,7 +14,7 @@ public class IconTabLayoutActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_icontablayout);
 
-    Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+    Toolbar toolbar = (Toolbar) findViewById(R.id.lib_toolbar);
     TabLayout tabLayout = (TabLayout) findViewById(R.id.icon_tab_layout);
     ViewPager viewPager = (ViewPager) findViewById(R.id.layout_view_pager);
     tabLayout.setupWithViewPager(viewPager);
