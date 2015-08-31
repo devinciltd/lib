@@ -35,29 +35,42 @@ import static org.robolectric.Shadows.shadowOf;
   @Test public void shouldCreateSignInButtonFromContext() throws Exception {
     SignInButton signInButton = new SignInButton(context);
 
-    assertThat(signInButton.getForeground()).isEqualTo(expectedForeground);
-    assertThat(signInButton.getBackground()).isEqualTo(expectedBackground);
     assertThat(signInButton.getText()).isEmpty();
     assertThat(signInButton.getIcon()).isNull();
+    assertThat(signInButton.getForeground()).isEqualTo(expectedForeground);
+    assertThat(signInButton.getBackground()).isEqualTo(expectedBackground);
   }
 
-  @Test public void shouldObtainStyledAttributesFromAttrs() throws Exception {
+  @Test public void shouldObtainTextFromAttrs() throws Exception {
     ResourceLoader resourceLoader = shadowOf(context.getResources()).getResourceLoader();
     String expectedTitle = context.getString(R.string.lib_sign_in_with_google);
-    Drawable expectedIcon = ViewUtils.getDrawable(context, R.drawable.lib_ic_sign_in_google);
-    List<Attribute> attributes = new ArrayList<>(2);
+    List<Attribute> attributes = new ArrayList<>(1);
     attributes.add(new Attribute(BuildConfig.APPLICATION_ID + ":attr/lib_signInText",
         "@string/lib_sign_in_with_google", BuildConfig.APPLICATION_ID));
+    AttributeSet attributeSet = new RoboAttributeSet(attributes, resourceLoader);
+
+    SignInButton signInButton = new SignInButton(context, attributeSet);
+
+    assertThat(signInButton.getText()).isEqualTo(expectedTitle);
+    assertThat(signInButton.getIcon()).isNull();
+    assertThat(signInButton.getBackground()).isEqualTo(expectedBackground);
+    assertThat(signInButton.getForeground()).isEqualTo(expectedForeground);
+  }
+
+  @Test public void shouldObtainIconFromAttrs() throws Exception {
+    ResourceLoader resourceLoader = shadowOf(context.getResources()).getResourceLoader();
+    Drawable expectedIcon = ViewUtils.getDrawable(context, R.drawable.lib_ic_sign_in_google);
+    List<Attribute> attributes = new ArrayList<>(1);
     attributes.add(new Attribute(BuildConfig.APPLICATION_ID + ":attr/lib_signInIcon",
         "@drawable/lib_ic_sign_in_google", BuildConfig.APPLICATION_ID));
     AttributeSet attributeSet = new RoboAttributeSet(attributes, resourceLoader);
 
     SignInButton signInButton = new SignInButton(context, attributeSet);
 
-    assertThat(signInButton.getForeground()).isEqualTo(expectedForeground);
-    assertThat(signInButton.getBackground()).isEqualTo(expectedBackground);
-    assertThat(signInButton.getText()).isEqualTo(expectedTitle);
     assertThat(signInButton.getIcon()).isEqualTo(expectedIcon);
+    assertThat(signInButton.getText()).isEmpty();
+    assertThat(signInButton.getBackground()).isEqualTo(expectedBackground);
+    assertThat(signInButton.getForeground()).isEqualTo(expectedForeground);
   }
 
   @Test public void shouldSetIcon() throws Exception {

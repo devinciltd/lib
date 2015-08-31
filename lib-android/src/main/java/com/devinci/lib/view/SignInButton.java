@@ -32,33 +32,35 @@ public class SignInButton extends FrameLayout {
     inflate(context, R.layout.lib_button_sign_in, this);
     height = getResources().getDimensionPixelSize(R.dimen.lib_button_sign_in_height);
 
-    if (!isInEditMode()) {
-      setForeground(ViewUtils.getDrawable(context, R.drawable.lib_button_sign_in_pressed_selector));
-      setBackgroundResource(R.drawable.lib_button_sign_in);
+    if (isInEditMode()) {
+      return;
+    }
 
-      if (attrs != null) {
-        int color;
-        Drawable icon;
-        String text;
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.lib_SignInButton);
+    setForeground(ViewUtils.getDrawable(context, R.drawable.lib_button_sign_in_pressed_selector));
+    setBackgroundResource(R.drawable.lib_button_sign_in);
 
-        try {
-          color = typedArray.getColor(R.styleable.lib_SignInButton_lib_signInColor, 0);
-          text = typedArray.getString(R.styleable.lib_SignInButton_lib_signInText);
-          icon = typedArray.getDrawable(R.styleable.lib_SignInButton_lib_signInIcon);
-        } finally {
-          typedArray.recycle();
-        }
+    if (attrs != null) {
+      int color;
+      Drawable icon;
+      String text;
+      TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.lib_SignInButton);
 
-        if (text != null) {
-          setTextInternal(text);
-        }
-        if (color != 0) {
-          setColorInternal(color);
-        }
-        if (icon != null) {
-          setIconInternal(icon);
-        }
+      try {
+        color = typedArray.getColor(R.styleable.lib_SignInButton_lib_signInColor, 0);
+        text = typedArray.getString(R.styleable.lib_SignInButton_lib_signInText);
+        icon = typedArray.getDrawable(R.styleable.lib_SignInButton_lib_signInIcon);
+      } finally {
+        typedArray.recycle();
+      }
+
+      if (text != null) {
+        setTextInternal(text);
+      }
+      if (color != 0) {
+        setColorInternal(color);
+      }
+      if (icon != null) {
+        setIconInternal(icon);
       }
     }
   }
