@@ -8,6 +8,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
+import android.support.annotation.VisibleForTesting;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -16,10 +17,7 @@ import com.devinci.lib.R;
 
 public class SignInButton extends FrameLayout {
 
-  private int height;
-  private int color;
-  private String text;
-  private Drawable icon;
+  private final int height;
 
   public SignInButton(Context context) {
     this(context, null);
@@ -32,13 +30,26 @@ public class SignInButton extends FrameLayout {
   public SignInButton(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
     inflate(context, R.layout.lib_button_sign_in, this);
+    height = getResources().getDimensionPixelSize(R.dimen.lib_button_sign_in_height);
+
     if (!isInEditMode()) {
       setForeground(ViewUtils.getDrawable(context, R.drawable.lib_button_sign_in_pressed_selector));
       setBackgroundResource(R.drawable.lib_button_sign_in);
-      height = getResources().getDimensionPixelSize(R.dimen.lib_button_sign_in_height);
 
       if (attrs != null) {
-        obtainStyledAttributes(context, attrs);
+        int color;
+        Drawable icon;
+        String text;
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.lib_SignInButton);
+
+        try {
+          color = typedArray.getColor(R.styleable.lib_SignInButton_lib_signInColor, 0);
+          text = typedArray.getString(R.styleable.lib_SignInButton_lib_signInText);
+          icon = typedArray.getDrawable(R.styleable.lib_SignInButton_lib_signInIcon);
+        } finally {
+          typedArray.recycle();
+        }
+
         if (text != null) {
           setTextInternal(text);
         }
@@ -49,17 +60,6 @@ public class SignInButton extends FrameLayout {
           setIconInternal(icon);
         }
       }
-    }
-  }
-
-  private void obtainStyledAttributes(Context context, AttributeSet attrs) {
-    TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.lib_SignInButton);
-    try {
-      color = typedArray.getColor(R.styleable.lib_SignInButton_lib_signInColor, 0);
-      text = typedArray.getString(R.styleable.lib_SignInButton_lib_signInText);
-      icon = typedArray.getDrawable(R.styleable.lib_SignInButton_lib_signInIcon);
-    } finally {
-      typedArray.recycle();
     }
   }
 
@@ -75,7 +75,11 @@ public class SignInButton extends FrameLayout {
     ((TextView) findViewById(R.id.lib_button_sign_in_text)).setText(text);
   }
 
-  private void setColor(@ColorRes int color) {
+  @VisibleForTesting String getText() {
+    return ((TextView) findViewById(R.id.lib_button_sign_in_text)).getText().toString();
+  }
+
+  public void setColor(@ColorRes int color) {
     setColorInternal(ViewUtils.getColor(getContext(), color));
   }
 
@@ -83,11 +87,15 @@ public class SignInButton extends FrameLayout {
     getBackground().mutate().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
   }
 
-  private void setIcon(@DrawableRes int icon) {
+  public void setIcon(@DrawableRes int icon) {
     setIconInternal(ViewUtils.getDrawable(getContext(), icon));
   }
 
   private void setIconInternal(Drawable icon) {
     ((ImageView) findViewById(R.id.lib_button_sign_in_icon)).setImageDrawable(icon);
+  }
+
+  @VisibleForTesting Drawable getIcon() {
+    return ((ImageView) findViewById(R.id.lib_button_sign_in_icon)).getDrawable();
   }
 }

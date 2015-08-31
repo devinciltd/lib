@@ -33,6 +33,8 @@ android {
   resourcePrefix 'lib_'
 
   testBuildType "debug"
+
+  useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
