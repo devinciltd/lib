@@ -5,8 +5,10 @@ import android.os.Build;
 /**
  * Utility methods to check Android version.
  */
-public enum Versions {
-  ;
+public class Versions {
+
+  private Versions() {
+  }
 
   /**
    * Checks if the device is at least Marshmallow 6.0 API23.
