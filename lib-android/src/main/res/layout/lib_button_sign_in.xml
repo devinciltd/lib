@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:background="@color/lib_sign_in_google"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_height="50dp"
+    >
+
+  <ImageView
+      android:id="@+id/lib_button_sign_in_icon"
+      android:layout_width="48dp"
+      android:layout_height="20dp"
+      android:layout_alignParentLeft="true"
+      android:layout_alignParentStart="true"
+      android:layout_centerVertical="true"
+      android:contentDescription="@string/lib_desc_sign_in_icon"
+      tools:src="@drawable/lib_ic_sign_in_google"
+      />
+
+  <TextView
+      android:id="@+id/lib_button_sign_in_text"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_centerInParent="true"
+      android:gravity="center"
+      android:textColor="@color/lib_white"
+      android:textSize="15sp"
+      tools:text="@string/lib_sign_in_with_google"
+      />
+</RelativeLayout>

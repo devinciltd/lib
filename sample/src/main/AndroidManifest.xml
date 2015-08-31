@@ -23,5 +23,9 @@
         android:name=".IconTabLayoutActivity"
         android:exported="true"
         />
+    <activity
+        android:name=".SignInButtonActivity"
+        android:exported="true"
+        />
   </application>
 </manifest>
