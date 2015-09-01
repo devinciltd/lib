@@ -2,6 +2,7 @@ package com.devinci.lib.view;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import com.devinci.lib.BuildConfig;
 import com.devinci.lib.R;
@@ -27,9 +28,11 @@ import static org.robolectric.Shadows.shadowOf;
 
   @Before public void setUp() throws Exception {
     context = RuntimeEnvironment.application;
-    expectedBackground = ViewUtils.getDrawable(context, R.drawable.lib_button_sign_in);
-    expectedForeground =
-        ViewUtils.getDrawable(context, R.drawable.lib_button_sign_in_pressed_selector);
+    expectedBackground =
+        ResourcesCompat.getDrawable(context.getResources(), R.drawable.lib_button_sign_in,
+            context.getTheme());
+    expectedForeground = ResourcesCompat.getDrawable(context.getResources(),
+        R.drawable.lib_button_sign_in_pressed_selector, context.getTheme());
   }
 
   @Test public void shouldCreateSignInButtonFromContext() throws Exception {
@@ -61,7 +64,9 @@ import static org.robolectric.Shadows.shadowOf;
 
   @Test public void shouldObtainIconFromAttrs() throws Exception {
     ResourceLoader resourceLoader = shadowOf(context.getResources()).getResourceLoader();
-    Drawable expectedIcon = ViewUtils.getDrawable(context, R.drawable.lib_ic_sign_in_google);
+    Drawable expectedIcon =
+        ResourcesCompat.getDrawable(context.getResources(), R.drawable.lib_ic_sign_in_google,
+            context.getTheme());
     List<Attribute> attributes = new ArrayList<>(1);
     attributes.add(new Attribute(BuildConfig.APPLICATION_ID + ":attr/lib_signInIcon",
         "@drawable/lib_ic_sign_in_google", BuildConfig.APPLICATION_ID));
@@ -77,7 +82,9 @@ import static org.robolectric.Shadows.shadowOf;
 
   @Test public void shouldSetIcon() throws Exception {
     SignInButton signInButton = new SignInButton(context);
-    Drawable expectedIcon = ViewUtils.getDrawable(context, R.drawable.lib_ic_sign_in_google);
+    Drawable expectedIcon =
+        ResourcesCompat.getDrawable(context.getResources(), R.drawable.lib_ic_sign_in_google,
+            context.getTheme());
 
     signInButton.setIcon(R.drawable.lib_ic_sign_in_google);
 

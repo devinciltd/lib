@@ -10,6 +10,8 @@ import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.annotation.VisibleForTesting;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -37,7 +39,8 @@ public class SignInButton extends FrameLayout {
       return;
     }
 
-    setForeground(ViewUtils.getDrawable(context, R.drawable.lib_button_sign_in_pressed_selector));
+    setForeground(ResourcesCompat.getDrawable(context.getResources(),
+        R.drawable.lib_button_sign_in_pressed_selector, context.getTheme()));
     setBackgroundResource(R.drawable.lib_button_sign_in);
 
     if (attrs != null) {
@@ -101,7 +104,7 @@ public class SignInButton extends FrameLayout {
   }
 
   public void setColor(@ColorRes int color) {
-    setColorInternal(ViewUtils.getColor(getContext(), color));
+    setColorInternal(ContextCompat.getColor(getContext(), color));
   }
 
   private void setColorInternal(@ColorInt int color) {
@@ -109,7 +112,8 @@ public class SignInButton extends FrameLayout {
   }
 
   public void setIcon(@DrawableRes int icon) {
-    setIconInternal(ViewUtils.getDrawable(getContext(), icon));
+    setIconInternal(
+        ResourcesCompat.getDrawable(getContext().getResources(), icon, getContext().getTheme()));
   }
 
   private void setIconInternal(Drawable icon) {
