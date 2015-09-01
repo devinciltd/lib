@@ -33,8 +33,10 @@ import static org.robolectric.Shadows.shadowOf;
   }
 
   @Test public void shouldCreateSignInButtonFromContext() throws Exception {
+    // when
     SignInButton signInButton = new SignInButton(context);
 
+    // then
     assertThat(signInButton.getText()).isEmpty();
     assertThat(signInButton.getIcon()).isNull();
     assertThat(signInButton.getForeground()).isEqualTo(expectedForeground);

@@ -6,6 +6,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
+import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.annotation.VisibleForTesting;
@@ -15,9 +16,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.devinci.lib.R;
 
+import static com.devinci.lib.util.Preconditions.checkState;
+
 public class SignInButton extends FrameLayout {
 
-  private final int height;
+  private int height;
 
   public SignInButton(Context context) {
     this(context, null);
@@ -30,8 +33,6 @@ public class SignInButton extends FrameLayout {
   public SignInButton(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
     inflate(context, R.layout.lib_button_sign_in, this);
-    height = getResources().getDimensionPixelSize(R.dimen.lib_button_sign_in_height);
-
     if (isInEditMode()) {
       return;
     }
@@ -43,16 +44,26 @@ public class SignInButton extends FrameLayout {
       int color;
       Drawable icon;
       String text;
-      TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.lib_SignInButton);
+      int textSize;
+      TypedArray typedArray =
+          context.obtainStyledAttributes(attrs, R.styleable.lib_SignInButton, defStyleAttr,
+              R.style.lib_Base_Widget_SignInButton);
 
       try {
         color = typedArray.getColor(R.styleable.lib_SignInButton_lib_signInColor, 0);
         text = typedArray.getString(R.styleable.lib_SignInButton_lib_signInText);
+        textSize =
+            typedArray.getDimensionPixelSize(R.styleable.lib_SignInButton_lib_signInTextSize, 0);
         icon = typedArray.getDrawable(R.styleable.lib_SignInButton_lib_signInIcon);
+        height = typedArray.getDimensionPixelSize(R.styleable.lib_SignInButton_lib_signInHeight, 0);
       } finally {
         typedArray.recycle();
       }
 
+      checkState(textSize > 0, "Default text size must be defined in style");
+      checkState(height > 0, "Default height must be defined in style");
+
+      setTextSizeInternal(textSize);
       if (text != null) {
         setTextInternal(text);
       }
@@ -79,6 +90,14 @@ public class SignInButton extends FrameLayout {
 
   @VisibleForTesting String getText() {
     return ((TextView) findViewById(R.id.lib_button_sign_in_text)).getText().toString();
+  }
+
+  public void setTextSize(@DimenRes int textSize) {
+    setTextSizeInternal(getResources().getDimensionPixelSize(textSize));
+  }
+
+  private void setTextSizeInternal(float textSize) {
+    ((TextView) findViewById(R.id.lib_button_sign_in_text)).setTextSize(textSize);
   }
 
   public void setColor(@ColorRes int color) {
