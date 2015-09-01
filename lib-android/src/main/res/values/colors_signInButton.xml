@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+  <color name="lib_sign_in_google">#FFE73F25</color>
+  <color name="lib_sign_in_drop_enabled">#FFDEDEDE</color>
+  <color name="lib_sign_in_pressed">#10000000</color>
+</resources>

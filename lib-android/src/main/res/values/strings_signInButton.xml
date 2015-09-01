@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- SignInButton -->
   <string name="lib_sign_in_with_google">Sign in with Google</string>
   <string name="lib_desc_sign_in_icon">Sign-in button icon</string>
 </resources>

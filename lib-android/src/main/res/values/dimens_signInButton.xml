@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- SignInButton -->
   <dimen name="lib_button_sign_in_height">48dp</dimen>
   <dimen name="lib_button_sign_in_text_size">15sp</dimen>
   <dimen name="lib_button_sign_in_card_corner">4dp</dimen>
