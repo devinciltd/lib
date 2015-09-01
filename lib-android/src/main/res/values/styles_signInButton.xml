@@ -5,6 +5,7 @@
       parent="">
     <item name="lib_signInHeight">@dimen/lib_button_sign_in_height</item>
     <item name="lib_signInTextSize">@dimen/lib_button_sign_in_text_size</item>
+    <item name="lib_signInTextColor">@color/lib_white</item>
     <item name="android:clickable">true</item>
   </style>
 

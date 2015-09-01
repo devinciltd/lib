@@ -3,11 +3,13 @@
 <resources>
   <declare-styleable name="lib_SignInButton">
     <attr name="lib_signInColor"
-        format="color"/>
+        format="reference|color"/>
     <attr name="lib_signInText"
         format="reference|string"/>
     <attr name="lib_signInTextSize"
         format="reference|dimension"/>
+    <attr name="lib_signInTextColor"
+        format="reference|color"/>
     <attr name="lib_signInIcon"
         format="reference"/>
     <attr name="lib_signInHeight"

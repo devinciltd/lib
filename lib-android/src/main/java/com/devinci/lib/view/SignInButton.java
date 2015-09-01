@@ -1,6 +1,7 @@
 package com.devinci.lib.view;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -11,8 +12,8 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import static com.devinci.lib.util.Preconditions.checkState;
 public class SignInButton extends FrameLayout {
 
   private int height;
+  private TextView buttonText;
 
   public SignInButton(Context context) {
     this(context, null);
@@ -35,18 +37,21 @@ public class SignInButton extends FrameLayout {
   public SignInButton(Context context, AttributeSet attrs, int defStyleAttr) {
     super(context, attrs, defStyleAttr);
     inflate(context, R.layout.lib_button_sign_in, this);
+    buttonText = (TextView) findViewById(R.id.lib_button_sign_in_text);
+
     if (isInEditMode()) {
       return;
     }
 
-    setForeground(ResourcesCompat.getDrawable(context.getResources(),
-        R.drawable.lib_button_sign_in_pressed_selector, context.getTheme()));
+    setForeground(
+        ContextCompat.getDrawable(context, R.drawable.lib_button_sign_in_pressed_selector));
     setBackgroundResource(R.drawable.lib_button_sign_in);
 
     if (attrs != null) {
       int color;
       Drawable icon;
       String text;
+      ColorStateList textColor;
       int textSize;
       TypedArray typedArray =
           context.obtainStyledAttributes(attrs, R.styleable.lib_SignInButton, defStyleAttr,
@@ -57,6 +62,7 @@ public class SignInButton extends FrameLayout {
         text = typedArray.getString(R.styleable.lib_SignInButton_lib_signInText);
         textSize =
             typedArray.getDimensionPixelSize(R.styleable.lib_SignInButton_lib_signInTextSize, 0);
+        textColor = typedArray.getColorStateList(R.styleable.lib_SignInButton_lib_signInTextColor);
         icon = typedArray.getDrawable(R.styleable.lib_SignInButton_lib_signInIcon);
         height = typedArray.getDimensionPixelSize(R.styleable.lib_SignInButton_lib_signInHeight, 0);
       } finally {
@@ -64,8 +70,10 @@ public class SignInButton extends FrameLayout {
       }
 
       checkState(textSize > 0, "Default text size must be defined in style");
+      checkState(textColor != null, "Default text color must be defined in style");
       checkState(height > 0, "Default height must be defined in style");
 
+      setTextColorInternal(textColor.getDefaultColor());
       setTextSizeInternal(textSize);
       if (text != null) {
         setTextInternal(text);
@@ -88,19 +96,19 @@ public class SignInButton extends FrameLayout {
   }
 
   private void setTextInternal(String text) {
-    ((TextView) findViewById(R.id.lib_button_sign_in_text)).setText(text);
+    buttonText.setText(text);
   }
 
   @VisibleForTesting String getText() {
-    return ((TextView) findViewById(R.id.lib_button_sign_in_text)).getText().toString();
+    return buttonText.getText().toString();
   }
 
   public void setTextSize(@DimenRes int textSize) {
     setTextSizeInternal(getResources().getDimensionPixelSize(textSize));
   }
 
-  private void setTextSizeInternal(float textSize) {
-    ((TextView) findViewById(R.id.lib_button_sign_in_text)).setTextSize(textSize);
+  private void setTextSizeInternal(int textSize) {
+    buttonText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
   }
 
   public void setColor(@ColorRes int color) {
@@ -112,8 +120,7 @@ public class SignInButton extends FrameLayout {
   }
 
   public void setIcon(@DrawableRes int icon) {
-    setIconInternal(
-        ResourcesCompat.getDrawable(getContext().getResources(), icon, getContext().getTheme()));
+    setIconInternal(ContextCompat.getDrawable(getContext(), icon));
   }
 
   private void setIconInternal(Drawable icon) {
@@ -122,5 +129,17 @@ public class SignInButton extends FrameLayout {
 
   @VisibleForTesting Drawable getIcon() {
     return ((ImageView) findViewById(R.id.lib_button_sign_in_icon)).getDrawable();
+  }
+
+  public void setTextColor(@ColorRes int textColor) {
+    setTextColorInternal(ContextCompat.getColor(getContext(), textColor));
+  }
+
+  private void setTextColorInternal(@ColorInt int textColor) {
+    buttonText.setTextColor(textColor);
+  }
+
+  @VisibleForTesting int getTextColor() {
+    return buttonText.getCurrentTextColor();
   }
 }

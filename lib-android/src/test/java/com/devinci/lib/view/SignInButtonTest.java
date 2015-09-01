@@ -1,8 +1,7 @@
 package com.devinci.lib.view;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import com.devinci.lib.BuildConfig;
 import com.devinci.lib.R;
@@ -23,16 +22,9 @@ import static org.robolectric.Shadows.shadowOf;
 @RunWith(RobolectricGradleTestRunner.class) public class SignInButtonTest {
 
   private Context context;
-  private Drawable expectedBackground;
-  private Drawable expectedForeground;
 
   @Before public void setUp() throws Exception {
     context = RuntimeEnvironment.application;
-    expectedBackground =
-        ResourcesCompat.getDrawable(context.getResources(), R.drawable.lib_button_sign_in,
-            context.getTheme());
-    expectedForeground = ResourcesCompat.getDrawable(context.getResources(),
-        R.drawable.lib_button_sign_in_pressed_selector, context.getTheme());
   }
 
   @Test public void shouldCreateSignInButtonFromContext() throws Exception {
@@ -40,10 +32,13 @@ import static org.robolectric.Shadows.shadowOf;
     SignInButton signInButton = new SignInButton(context);
 
     // then
+    assertThat(signInButton.getTextColor()).isNotEqualTo(0);
     assertThat(signInButton.getText()).isEmpty();
     assertThat(signInButton.getIcon()).isNull();
-    assertThat(signInButton.getForeground()).isEqualTo(expectedForeground);
-    assertThat(signInButton.getBackground()).isEqualTo(expectedBackground);
+    assertThat(shadowOf(signInButton.getForeground()).getCreatedFromResId()).isEqualTo(
+        R.drawable.lib_button_sign_in_pressed_selector);
+    assertThat(shadowOf(signInButton.getBackground()).getCreatedFromResId()).isEqualTo(
+        R.drawable.lib_button_sign_in);
   }
 
   @Test public void shouldObtainTextFromAttrs() throws Exception {
@@ -57,16 +52,10 @@ import static org.robolectric.Shadows.shadowOf;
     SignInButton signInButton = new SignInButton(context, attributeSet);
 
     assertThat(signInButton.getText()).isEqualTo(expectedTitle);
-    assertThat(signInButton.getIcon()).isNull();
-    assertThat(signInButton.getBackground()).isEqualTo(expectedBackground);
-    assertThat(signInButton.getForeground()).isEqualTo(expectedForeground);
   }
 
   @Test public void shouldObtainIconFromAttrs() throws Exception {
     ResourceLoader resourceLoader = shadowOf(context.getResources()).getResourceLoader();
-    Drawable expectedIcon =
-        ResourcesCompat.getDrawable(context.getResources(), R.drawable.lib_ic_sign_in_google,
-            context.getTheme());
     List<Attribute> attributes = new ArrayList<>(1);
     attributes.add(new Attribute(BuildConfig.APPLICATION_ID + ":attr/lib_signInIcon",
         "@drawable/lib_ic_sign_in_google", BuildConfig.APPLICATION_ID));
@@ -74,29 +63,48 @@ import static org.robolectric.Shadows.shadowOf;
 
     SignInButton signInButton = new SignInButton(context, attributeSet);
 
-    assertThat(signInButton.getIcon()).isEqualTo(expectedIcon);
-    assertThat(signInButton.getText()).isEmpty();
-    assertThat(signInButton.getBackground()).isEqualTo(expectedBackground);
-    assertThat(signInButton.getForeground()).isEqualTo(expectedForeground);
+    assertThat(shadowOf(signInButton.getIcon()).getCreatedFromResId()).isEqualTo(
+        R.drawable.lib_ic_sign_in_google);
+  }
+
+  @Test public void shouldObtainTextColorFromAttrs() throws Exception {
+    ResourceLoader resourceLoader = shadowOf(context.getResources()).getResourceLoader();
+    int expectedTextColor = ContextCompat.getColor(context, R.color.lib_black);
+    List<Attribute> attributes = new ArrayList<>(1);
+    attributes.add(
+        new Attribute(BuildConfig.APPLICATION_ID + ":attr/lib_signInTextColor", "@color/lib_black",
+            BuildConfig.APPLICATION_ID));
+    AttributeSet attributeSet = new RoboAttributeSet(attributes, resourceLoader);
+
+    SignInButton signInButton = new SignInButton(context, attributeSet);
+
+    assertThat(signInButton.getTextColor()).isEqualTo(expectedTextColor);
   }
 
   @Test public void shouldSetIcon() throws Exception {
     SignInButton signInButton = new SignInButton(context);
-    Drawable expectedIcon =
-        ResourcesCompat.getDrawable(context.getResources(), R.drawable.lib_ic_sign_in_google,
-            context.getTheme());
 
-    signInButton.setIcon(R.drawable.lib_ic_sign_in_google);
+    signInButton.setIcon(android.R.drawable.ic_btn_speak_now);
 
-    assertThat(signInButton.getIcon()).isEqualTo(expectedIcon);
+    assertThat(shadowOf(signInButton.getIcon()).getCreatedFromResId()).isEqualTo(
+        android.R.drawable.ic_btn_speak_now);
   }
 
   @Test public void shouldSetText() throws Exception {
     SignInButton signInButton = new SignInButton(context);
-    String expectedText = context.getString(R.string.lib_sign_in_with_google);
+    String expectedText = context.getString(android.R.string.ok);
 
-    signInButton.setText(R.string.lib_sign_in_with_google);
+    signInButton.setText(android.R.string.ok);
 
     assertThat(signInButton.getText()).isEqualTo(expectedText);
+  }
+
+  @Test public void shouldSetTextColor() throws Exception {
+    SignInButton signInButton = new SignInButton(context);
+    int expectedColor = ContextCompat.getColor(context, android.R.color.darker_gray);
+
+    signInButton.setTextColor(android.R.color.darker_gray);
+
+    assertThat(signInButton.getTextColor()).isEqualTo(expectedColor);
   }
 }

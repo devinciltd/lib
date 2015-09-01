@@ -25,7 +25,7 @@
       android:layout_height="wrap_content"
       android:layout_centerInParent="true"
       android:gravity="center"
-      android:textColor="@color/lib_white"
+      tools:textColor="@color/lib_white"
       tools:textSize="@dimen/lib_button_sign_in_text_size"
       tools:text="@string/lib_sign_in_with_google"
       />
