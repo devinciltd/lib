@@ -23,11 +23,11 @@ import static org.robolectric.Shadows.shadowOf;
 
   private Context context;
 
-  @Before public void setUp() throws Exception {
+  @Before public void setUp() {
     context = RuntimeEnvironment.application;
   }
 
-  @Test public void shouldCreateSignInButtonFromContext() throws Exception {
+  @Test public void shouldCreateSignInButtonFromContext() {
     // when
     SignInButton signInButton = new SignInButton(context);
 
@@ -41,7 +41,7 @@ import static org.robolectric.Shadows.shadowOf;
         R.drawable.lib_button_sign_in);
   }
 
-  @Test public void shouldObtainTextFromAttrs() throws Exception {
+  @Test public void shouldObtainTextFromAttrs() {
     ResourceLoader resourceLoader = shadowOf(context.getResources()).getResourceLoader();
     String expectedTitle = context.getString(R.string.lib_sign_in_with_google);
     List<Attribute> attributes = new ArrayList<>(1);
@@ -54,7 +54,7 @@ import static org.robolectric.Shadows.shadowOf;
     assertThat(signInButton.getText()).isEqualTo(expectedTitle);
   }
 
-  @Test public void shouldObtainIconFromAttrs() throws Exception {
+  @Test public void shouldObtainIconFromAttrs() {
     ResourceLoader resourceLoader = shadowOf(context.getResources()).getResourceLoader();
     List<Attribute> attributes = new ArrayList<>(1);
     attributes.add(new Attribute(BuildConfig.APPLICATION_ID + ":attr/lib_signInIcon",
@@ -67,7 +67,7 @@ import static org.robolectric.Shadows.shadowOf;
         R.drawable.lib_ic_sign_in_google);
   }
 
-  @Test public void shouldObtainTextColorFromAttrs() throws Exception {
+  @Test public void shouldObtainTextColorFromAttrs() {
     ResourceLoader resourceLoader = shadowOf(context.getResources()).getResourceLoader();
     int expectedTextColor = ContextCompat.getColor(context, R.color.lib_black);
     List<Attribute> attributes = new ArrayList<>(1);
@@ -81,7 +81,7 @@ import static org.robolectric.Shadows.shadowOf;
     assertThat(signInButton.getTextColor()).isEqualTo(expectedTextColor);
   }
 
-  @Test public void shouldSetIcon() throws Exception {
+  @Test public void shouldSetIcon() {
     SignInButton signInButton = new SignInButton(context);
 
     signInButton.setIcon(android.R.drawable.ic_btn_speak_now);
@@ -90,7 +90,7 @@ import static org.robolectric.Shadows.shadowOf;
         android.R.drawable.ic_btn_speak_now);
   }
 
-  @Test public void shouldSetText() throws Exception {
+  @Test public void shouldSetText() {
     SignInButton signInButton = new SignInButton(context);
     String expectedText = context.getString(android.R.string.ok);
 
@@ -99,7 +99,7 @@ import static org.robolectric.Shadows.shadowOf;
     assertThat(signInButton.getText()).isEqualTo(expectedText);
   }
 
-  @Test public void shouldSetTextColor() throws Exception {
+  @Test public void shouldSetTextColor() {
     SignInButton signInButton = new SignInButton(context);
     int expectedColor = ContextCompat.getColor(context, android.R.color.darker_gray);
 
