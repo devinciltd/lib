@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+  <declare-styleable name="lib_SignInButton">
+    <attr name="lib_signInColor"
+        format="reference|color"/>
+    <attr name="lib_signInText"
+        format="reference|string"/>
+    <attr name="lib_signInTextSize"
+        format="reference|dimension"/>
+    <attr name="lib_signInTextColor"
+        format="reference|color"/>
+    <attr name="lib_signInIcon"
+        format="reference"/>
+    <attr name="lib_signInHeight"
+        format="reference|dimension"/>
+  </declare-styleable>
+</resources>

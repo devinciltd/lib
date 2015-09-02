@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+  <style name="lib_Base.Widget.SignInButton"
+      parent="">
+    <item name="lib_signInHeight">@dimen/lib_button_sign_in_height</item>
+    <item name="lib_signInTextSize">@dimen/lib_button_sign_in_text_size</item>
+    <item name="lib_signInTextColor">@color/lib_white</item>
+    <item name="android:clickable">true</item>
+  </style>
+
+  <style name="lib_Widget.SignInButton.Google"
+      parent="lib_Base.Widget.SignInButton">
+    <item name="lib_signInColor">@color/lib_sign_in_google</item>
+    <item name="lib_signInText">@string/lib_sign_in_with_google</item>
+    <item name="lib_signInIcon">@drawable/lib_ic_sign_in_google</item>
+  </style>
+</resources>
