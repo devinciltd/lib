@@ -11,13 +11,12 @@ android:
   - sys-img-armeabi-v7a-android-19
 env:
   - ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a
-before_script:
+script: ./gradlew build
+after_success:
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
-script: ./gradlew --parallel test connectedCheck
-after_success:
-  - ./gradlew --parallel jacocoTestReport
+  - ./gradlew connectedCheck jacocoTestReport
   - bash <(curl -s https://codecov.io/bash)
 notifications:
   slack:
