@@ -52,8 +52,10 @@ dependencies {
   testCompile mockitoCore
   testCompile robolectric
 
-  androidTestCompile junit
+  androidTestCompile assertJCore
+  androidTestCompile dagger.compiler
   androidTestCompile espressoCore
+  androidTestCompile junit
 }
 
 tasks.withType(JavaCompile) {
