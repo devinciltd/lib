@@ -8,9 +8,15 @@ android:
   - extra-google-m2repository
   - extra-android-m2repository
   - addon-google_apis-google-19
+  - sys-img-armeabi-v7a-android-15
+env:
+  - ANDROID_TARGET=android-15 ANDROID_ABI=armeabi-v7a
 script: ./gradlew build
 after_success:
-  - ./gradlew jacocoTestReport
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - ./gradlew connectedCheck jacocoTestReport
   - bash <(curl -s https://codecov.io/bash)
 notifications:
   slack:

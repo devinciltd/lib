@@ -12,8 +12,5 @@ public class MainActivity extends BaseActivity {
 
     Toolbar toolbar = (Toolbar) findViewById(R.id.lib_toolbar);
     setSupportActionBar(toolbar);
-
-    // Crash reporting should be injected (crashReporting != null)
-    crashReporting.sendException(new RuntimeException());
   }
 }
