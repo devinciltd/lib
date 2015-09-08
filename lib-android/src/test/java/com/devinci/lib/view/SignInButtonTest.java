@@ -17,6 +17,7 @@ import org.robolectric.res.ResourceLoader;
 import org.robolectric.shadows.RoboAttributeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.util.Lists.newArrayList;
 import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricGradleTestRunner.class) public class SignInButtonTest {
@@ -44,10 +45,9 @@ import static org.robolectric.Shadows.shadowOf;
   @Test public void shouldObtainTextFromAttrs() {
     ResourceLoader resourceLoader = shadowOf(context.getResources()).getResourceLoader();
     String expectedTitle = context.getString(R.string.lib_sign_in_with_google);
-    List<Attribute> attributes = new ArrayList<>(1);
-    attributes.add(new Attribute(BuildConfig.APPLICATION_ID + ":attr/lib_signInText",
-        "@string/lib_sign_in_with_google", BuildConfig.APPLICATION_ID));
-    AttributeSet attributeSet = new RoboAttributeSet(attributes, resourceLoader);
+    AttributeSet attributeSet = new RoboAttributeSet(newArrayList(
+        new Attribute(BuildConfig.APPLICATION_ID + ":attr/lib_signInText",
+            "@string/lib_sign_in_with_google", BuildConfig.APPLICATION_ID)), resourceLoader);
 
     SignInButton signInButton = new SignInButton(context, attributeSet);
 
