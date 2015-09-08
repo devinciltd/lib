@@ -44,7 +44,7 @@ private String createPathFromPackageName(String packageName) {
 }
 
 private String createJavaCompileTaskName(variant, String packageName) {
-  "compile${variant.name.capitalize()}${packageName}"
+  "compile${variant.name.capitalize()}${GUtil.toCamelCase packageName}"
 }
 
 private String getGeneratedSourcesPath(variant, String destinationPath) {
