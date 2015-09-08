@@ -38,7 +38,6 @@ import static org.robolectric.Shadows.shadowOf;
   @Test public void shouldSetTabsFromPagerAdapterInstance() {
     // given
     IconTabLayout iconTabLayout = new IconTabLayout(RuntimeEnvironment.application);
-    given(pagerAdapter.getCount()).willReturn(2);
 
     // when
     iconTabLayout.setTabsFromPagerAdapter(pagerAdapter);
