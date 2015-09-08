@@ -1,19 +1,17 @@
 package com.devinci.lib.view;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import com.devinci.lib.BuildConfig;
 import com.devinci.lib.R;
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.res.Attribute;
-import org.robolectric.res.ResourceLoader;
 import org.robolectric.shadows.RoboAttributeSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,11 +41,9 @@ import static org.robolectric.Shadows.shadowOf;
   }
 
   @Test public void shouldObtainTextFromAttrs() {
-    ResourceLoader resourceLoader = shadowOf(context.getResources()).getResourceLoader();
     String expectedTitle = context.getString(R.string.lib_sign_in_with_google);
-    AttributeSet attributeSet = new RoboAttributeSet(newArrayList(
-        new Attribute(BuildConfig.APPLICATION_ID + ":attr/lib_signInText",
-            "@string/lib_sign_in_with_google", BuildConfig.APPLICATION_ID)), resourceLoader);
+    AttributeSet attributeSet =
+        createAttributeSet(withAttribute("lib_signInText", "@string/lib_sign_in_with_google"));
 
     SignInButton signInButton = new SignInButton(context, attributeSet);
 
@@ -55,11 +51,8 @@ import static org.robolectric.Shadows.shadowOf;
   }
 
   @Test public void shouldObtainIconFromAttrs() {
-    ResourceLoader resourceLoader = shadowOf(context.getResources()).getResourceLoader();
-    List<Attribute> attributes = new ArrayList<>(1);
-    attributes.add(new Attribute(BuildConfig.APPLICATION_ID + ":attr/lib_signInIcon",
-        "@drawable/lib_ic_sign_in_google", BuildConfig.APPLICATION_ID));
-    AttributeSet attributeSet = new RoboAttributeSet(attributes, resourceLoader);
+    AttributeSet attributeSet =
+        createAttributeSet(withAttribute("lib_signInIcon", "@drawable/lib_ic_sign_in_google"));
 
     SignInButton signInButton = new SignInButton(context, attributeSet);
 
@@ -68,13 +61,9 @@ import static org.robolectric.Shadows.shadowOf;
   }
 
   @Test public void shouldObtainTextColorFromAttrs() {
-    ResourceLoader resourceLoader = shadowOf(context.getResources()).getResourceLoader();
     int expectedTextColor = ContextCompat.getColor(context, R.color.lib_black);
-    List<Attribute> attributes = new ArrayList<>(1);
-    attributes.add(
-        new Attribute(BuildConfig.APPLICATION_ID + ":attr/lib_signInTextColor", "@color/lib_black",
-            BuildConfig.APPLICATION_ID));
-    AttributeSet attributeSet = new RoboAttributeSet(attributes, resourceLoader);
+    AttributeSet attributeSet =
+        createAttributeSet(withAttribute("lib_signInTextColor", "@color/lib_black"));
 
     SignInButton signInButton = new SignInButton(context, attributeSet);
 
@@ -106,5 +95,15 @@ import static org.robolectric.Shadows.shadowOf;
     signInButton.setTextColor(android.R.color.darker_gray);
 
     assertThat(signInButton.getTextColor()).isEqualTo(expectedColor);
+  }
+
+  @NonNull private RoboAttributeSet createAttributeSet(Attribute... attributes) {
+    return new RoboAttributeSet(newArrayList(attributes),
+        shadowOf(context.getResources()).getResourceLoader());
+  }
+
+  @NonNull private Attribute withAttribute(String name, String value) {
+    return new Attribute(BuildConfig.APPLICATION_ID + ":attr/" + name, value,
+        BuildConfig.APPLICATION_ID);
   }
 }
