@@ -5,23 +5,20 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.util.AttributeSet;
-import com.devinci.lib.BuildConfig;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
-import org.robolectric.res.Attribute;
-import org.robolectric.shadows.RoboAttributeSet;
 
+import static com.devinci.lib.AttributeSetUtils.createAttributeSet;
+import static com.devinci.lib.AttributeSetUtils.withAttribute;
 import static java.lang.String.valueOf;
 import static org.assertj.android.design.api.Assertions.assertThat;
-import static org.assertj.core.util.Lists.newArrayList;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.MockitoAnnotations.initMocks;
-import static org.robolectric.Shadows.shadowOf;
 
 @RunWith(RobolectricGradleTestRunner.class) public class IconTabLayoutTest {
 
@@ -84,9 +81,7 @@ import static org.robolectric.Shadows.shadowOf;
 
   @NonNull private AttributeSet createAttributeSetWithPageTitlesVisible(@NonNull Context context,
       boolean pageTitlesVisible) {
-    return new RoboAttributeSet(newArrayList(
-        new Attribute(BuildConfig.APPLICATION_ID + ":attr/lib_pageTitlesVisible",
-            valueOf(pageTitlesVisible), BuildConfig.APPLICATION_ID)),
-        shadowOf(context.getResources()).getResourceLoader());
+    return createAttributeSet(context,
+        withAttribute("lib_pageTitlesVisible", valueOf(pageTitlesVisible)));
   }
 }
