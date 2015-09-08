@@ -16,12 +16,12 @@ plugins {
 
 ext {
   configCompileSdkVersion = 23
-  configBuildToolsVersion = '23'
   configTargetSdkVersion = 23
+  configBuildToolsVersion = '23.0.1'
 
   addJacoco = 'gradle/jacoco.gradle'
 
-  supportVersion = '23.0.0'
+  supportVersion = '23.0.1'
 
   support = [appCompat  : "com.android.support:appcompat-v7:$supportVersion",
              annotations: "com.android.support:support-annotations:$supportVersion",
