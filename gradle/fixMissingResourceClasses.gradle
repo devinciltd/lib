@@ -22,7 +22,7 @@ ext {
       task(javaCompileTaskName, type: JavaCompile) {
         source = file(generatedSourcesPath)
         destinationDir = file(getTestClassPath(variant))
-        classpath = fileTree(".")
+        classpath = variant.javaCompile.classpath
       }
 
       tasks.getByName(copyTaskName).finalizedBy(javaCompileTaskName)
