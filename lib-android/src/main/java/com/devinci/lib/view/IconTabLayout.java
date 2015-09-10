@@ -48,7 +48,7 @@ public class IconTabLayout extends TabLayout {
     return adapter instanceof LayoutViewPager.LayoutPagerAdapter;
   }
 
-  public void setTabIconsFromLayoutPagerAdapter(
+  private void setTabIconsFromLayoutPagerAdapter(
       @NonNull LayoutViewPager.LayoutPagerAdapter adapter) {
     for (int i = 0; i < getTabCount(); ++i) {
       setTabIconAtPosition(i, adapter.getPageIcon(i));

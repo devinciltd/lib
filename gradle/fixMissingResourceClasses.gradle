@@ -1,0 +1,68 @@
+// Fixes https://github.com/robolectric/robolectric/issues/1796
+
+ext {
+  generateMissingResourceClass = { String missingPackageName ->
+    android.libraryVariants.each { variant ->
+      //noinspection GroovyAssignabilityCheck
+      def libraryPackageName = getPackageNameFromManifest(android.sourceSets.main.manifest.srcFile)
+      def copyTaskName = createCopyTaskName(variant, missingPackageName)
+      def destinationPath = createPathFromPackageName(missingPackageName)
+      def javaCompileTaskName = createJavaCompileTaskName(variant, missingPackageName)
+      def generatedSourcesPath = getGeneratedSourcesPath(variant, destinationPath)
+
+      task(copyTaskName, type: Copy) {
+        from { createSourceCopyPath(variant, libraryPackageName) }
+        into { generatedSourcesPath }
+        include 'R.java'
+
+        filter { line -> replacePackageName(libraryPackageName, missingPackageName, line)
+        }
+      }
+
+      task(javaCompileTaskName, type: JavaCompile) {
+        source = file(generatedSourcesPath)
+        destinationDir = file(getTestClassPath(variant))
+        classpath = variant.javaCompile.classpath
+      }
+
+      tasks.getByName(copyTaskName).finalizedBy(javaCompileTaskName)
+      tasks.getByName(getProcessResourcesTaskName(variant)).finalizedBy(copyTaskName)
+    }
+  }
+}
+
+private String getPackageNameFromManifest(File manifestFile) {
+  new XmlSlurper().parse(manifestFile).@package.text()
+}
+
+private String createCopyTaskName(variant, String packageName) {
+  "copy${variant.name.capitalize()}${GUtil.toCamelCase packageName}"
+}
+
+private String createPathFromPackageName(String packageName) {
+  packageName.replaceAll("\\.", "/")
+}
+
+private String createJavaCompileTaskName(variant, String packageName) {
+  "compile${variant.name.capitalize()}${GUtil.toCamelCase packageName}"
+}
+
+private String getGeneratedSourcesPath(variant, String destinationPath) {
+  "$buildDir/generated/source/r/test/$variant.dirName/$destinationPath"
+}
+
+private String createSourceCopyPath(variant, String packageName) {
+  "$buildDir/generated/source/r/${variant.dirName}/${createPathFromPackageName(packageName)}"
+}
+
+private replacePackageName(String libraryPackageName, String missingPackageName, line) {
+  line.contains("package $libraryPackageName;") ? "package $missingPackageName;" : line
+}
+
+private String getTestClassPath(variant) {
+  "$buildDir/intermediates/classes/test/$variant.dirName"
+}
+
+private String getProcessResourcesTaskName(variant) {
+  "process${variant.name.capitalize()}Resources"
+}

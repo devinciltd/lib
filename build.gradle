@@ -20,6 +20,7 @@ ext {
   configBuildToolsVersion = '23.0.1'
 
   addJacoco = 'gradle/jacoco.gradle'
+  fixMissingResourceClasses = 'gradle/fixMissingResourceClasses.gradle'
 
   supportVersion = '23.0.1'
 
@@ -32,6 +33,9 @@ ext {
             compiler: 'com.google.dagger:dagger-compiler:2.0.1']
   jsr205 = 'javax.annotation:jsr250-api:1.0'
 
+  assertJAndroidVersion = '1.1.0'
+  assertJAndroid =
+      [design: "com.squareup.assertj:assertj-android-design:$assertJAndroidVersion@aar"]
   assertJCore = 'org.assertj:assertj-core:1.7.1'
   junit = 'junit:junit:4.12'
   mockitoCore = 'org.mockito:mockito-core:1.10.19'

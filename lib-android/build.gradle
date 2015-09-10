@@ -3,6 +3,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 apply from: rootProject.file(addJacoco)
+apply from: rootProject.file(fixMissingResourceClasses)
 
 project.archivesBaseName = 'android'
 
@@ -47,6 +48,7 @@ dependencies {
   apt dagger.compiler
   provided jsr205
 
+  testCompile assertJAndroid.design
   testCompile assertJCore
   testCompile junit
   testCompile mockitoCore
@@ -70,4 +72,8 @@ task androidSourcesJar(type: Jar) {
 
 artifacts {
   archives androidSourcesJar
+}
+
+afterEvaluate {
+  ['android.support.design', 'android.support.v7.appcompat'].each generateMissingResourceClass
 }
