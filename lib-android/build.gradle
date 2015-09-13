@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'android-apt'
+apply plugin: 'jacoco-android'
 apply plugin: 'me.tatarka.retrolambda'
-apply from: rootProject.file(addJacoco)
 apply from: rootProject.file(fixMissingResourceClasses)
 
 project.archivesBaseName = 'android'
@@ -72,6 +72,10 @@ task androidSourcesJar(type: Jar) {
 
 artifacts {
   archives androidSourcesJar
+}
+
+jacocoAndroidUnitTestReport {
+  excludes = jacocoExcludes
 }
 
 afterEvaluate {
