@@ -1,9 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'jacoco-android'
 apply plugin: 'me.tatarka.retrolambda'
 
-project.archivesBaseName = 'android-common'
+project.archivesBaseName = 'android-robolectric'
 
 android {
   compileSdkVersion configCompileSdkVersion
@@ -27,17 +26,17 @@ android {
     targetCompatibility JavaVersion.VERSION_1_8
   }
 
-  resourcePrefix 'lib_'
+  lintOptions {
+    disable 'InvalidPackage'
+  }
+
+  useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
+  compile project(':lib-android-common')
+  compile robolectric
   provided support.annotations
-  provided dagger.dagger
-}
-
-tasks.withType(JavaCompile) {
-  options.compilerArgs << "-Xlint:unchecked"
-  options.compilerArgs << "-Xlint:deprecation"
 }
 
 task androidSourcesJar(type: Jar) {
@@ -49,6 +48,3 @@ artifacts {
   archives androidSourcesJar
 }
 
-jacocoAndroidUnitTestReport {
-  excludes = jacocoExcludes
-}

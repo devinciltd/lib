@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.util.AttributeSet;
+import com.devinci.lib.robolectric.AttributeSetBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,8 +13,6 @@ import org.mockito.Mock;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import static com.devinci.lib.AttributeSetUtils.createAttributeSet;
-import static com.devinci.lib.AttributeSetUtils.withAttribute;
 import static java.lang.String.valueOf;
 import static org.assertj.android.design.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
@@ -62,7 +61,9 @@ import static org.mockito.MockitoAnnotations.initMocks;
   @Test public void shouldNotSetPageTitlesIfAttributeSetToFalse() {
     // given
     Context context = RuntimeEnvironment.application;
-    AttributeSet attributeSet = createAttributeSetWithPageTitlesVisible(context, false);
+    AttributeSet attributeSet = AttributeSetBuilder.from(context)
+        .addAttribute("lib_pageTitlesVisible", valueOf(false))
+        .build();
     IconTabLayout iconTabLayout = new IconTabLayout(context, attributeSet);
 
     // when
@@ -77,11 +78,5 @@ import static org.mockito.MockitoAnnotations.initMocks;
     given(pagerAdapter.getCount()).willReturn(2);
     given(pagerAdapter.getPageTitle(0)).willReturn("barbers");
     given(pagerAdapter.getPageTitle(1)).willReturn("lumberjacks");
-  }
-
-  @NonNull private AttributeSet createAttributeSetWithPageTitlesVisible(@NonNull Context context,
-      boolean pageTitlesVisible) {
-    return createAttributeSet(context,
-        withAttribute("lib_pageTitlesVisible", valueOf(pageTitlesVisible)));
   }
 }
