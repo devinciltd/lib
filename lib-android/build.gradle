@@ -53,7 +53,7 @@ dependencies {
   testCompile assertJCore
   testCompile junit
   testCompile mockitoCore
-  testCompile robolectric
+  testCompile robolectric.core
 
   androidTestCompile assertJCore
   androidTestCompile dagger.compiler

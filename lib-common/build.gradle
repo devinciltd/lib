@@ -6,7 +6,7 @@ apply plugin: 'me.tatarka.retrolambda'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-project.archivesBaseName = 'android-robolectric'
+project.archivesBaseName = 'common'
 
 configurations {
   provided
@@ -15,10 +15,7 @@ configurations {
 }
 
 dependencies {
-  compile project(':lib-common')
-  compile robolectric.core
   provided jsr305
-  provided robolectric.androidAll
 }
 
 task sourcesJar(type: Jar) {
