@@ -7,13 +7,14 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import org.robolectric.res.Attribute;
 import org.robolectric.res.ResName;
+import org.robolectric.res.ResourceLoader;
 import org.robolectric.shadows.RoboAttributeSet;
 
-import static com.devinci.lib.util.Preconditions.checkNotNull;
 import static org.robolectric.Shadows.shadowOf;
 
 public class AttributeSetBuilder {
-  private final Context context;
+  private final String packageName;
+  private final ResourceLoader resourceLoader;
   private final List<Attribute> attributes;
 
   @Nonnull public static AttributeSetBuilder from(@Nonnull Context context) {
@@ -21,17 +22,17 @@ public class AttributeSetBuilder {
   }
 
   private AttributeSetBuilder(@Nonnull Context context) {
-    this.context = checkNotNull(context);
+    this.packageName = context.getPackageName();
+    this.resourceLoader = shadowOf(context.getResources()).getResourceLoader();
     this.attributes = new ArrayList<>();
   }
 
   public AttributeSetBuilder addAttribute(@Nonnull String name, @Nonnull String value) {
-    attributes.add(new Attribute(new ResName(context.getPackageName(), "attr", name), value,
-        context.getPackageName()));
+    attributes.add(new Attribute(new ResName(packageName, "attr", name), value, packageName));
     return this;
   }
 
   @Nonnull public AttributeSet build() {
-    return new RoboAttributeSet(attributes, shadowOf(context.getResources()).getResourceLoader());
+    return new RoboAttributeSet(attributes, resourceLoader);
   }
 }

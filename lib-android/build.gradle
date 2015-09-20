@@ -56,7 +56,6 @@ dependencies {
   testCompile robolectric.core
 
   androidTestCompile assertJCore
-  androidTestCompile dagger.compiler
   androidTestCompile espressoCore
   androidTestCompile junit
 }

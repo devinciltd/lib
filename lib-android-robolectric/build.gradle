@@ -4,7 +4,6 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'me.tatarka.retrolambda'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
 
 project.archivesBaseName = 'android-robolectric'
 
@@ -15,7 +14,6 @@ configurations {
 }
 
 dependencies {
-  compile project(':lib-common')
   compile robolectric.core
   provided jsr305
   provided robolectric.androidAll
