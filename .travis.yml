@@ -11,7 +11,7 @@ android:
   - sys-img-armeabi-v7a-android-15
 env:
   - ANDROID_TARGET=android-15 ANDROID_ABI=armeabi-v7a
-script: ./gradlew build assembleAndroidTest --debug --stacktrace
+script: ./gradlew build assembleAndroidTest --info --stacktrace
 after_success:
   - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
   - emulator -avd test -no-skin -no-audio -no-window &
