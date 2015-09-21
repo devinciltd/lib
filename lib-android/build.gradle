@@ -48,14 +48,14 @@ dependencies {
   apt dagger.compiler
   provided jsr205
 
+  testCompile project(':lib-android-robolectric')
   testCompile assertJAndroid.design
   testCompile assertJCore
   testCompile junit
   testCompile mockitoCore
-  testCompile robolectric
+  testCompile robolectric.core
 
   androidTestCompile assertJCore
-  androidTestCompile dagger.compiler
   androidTestCompile espressoCore
   androidTestCompile junit
 }

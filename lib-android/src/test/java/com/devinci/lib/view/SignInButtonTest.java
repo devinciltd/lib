@@ -4,14 +4,13 @@ import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import com.devinci.lib.R;
+import com.devinci.lib.robolectric.AttributeSetBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
-import static com.devinci.lib.AttributeSetUtils.createAttributeSet;
-import static com.devinci.lib.AttributeSetUtils.withAttribute;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.robolectric.Shadows.shadowOf;
 
@@ -39,8 +38,9 @@ import static org.robolectric.Shadows.shadowOf;
 
   @Test public void shouldObtainTextFromAttrs() {
     String expectedTitle = context.getString(R.string.lib_sign_in_with_google);
-    AttributeSet attributeSet = createAttributeSet(context,
-        withAttribute("lib_signInText", "@string/lib_sign_in_with_google"));
+    AttributeSet attributeSet = AttributeSetBuilder.from(context)
+        .addAttribute("lib_signInText", "@string/lib_sign_in_with_google")
+        .build();
 
     SignInButton signInButton = new SignInButton(context, attributeSet);
 
@@ -48,8 +48,9 @@ import static org.robolectric.Shadows.shadowOf;
   }
 
   @Test public void shouldObtainIconFromAttrs() {
-    AttributeSet attributeSet = createAttributeSet(context,
-        withAttribute("lib_signInIcon", "@drawable/lib_ic_sign_in_google"));
+    AttributeSet attributeSet = AttributeSetBuilder.from(context)
+        .addAttribute("lib_signInIcon", "@drawable/lib_ic_sign_in_google")
+        .build();
 
     SignInButton signInButton = new SignInButton(context, attributeSet);
 
@@ -59,8 +60,9 @@ import static org.robolectric.Shadows.shadowOf;
 
   @Test public void shouldObtainTextColorFromAttrs() {
     int expectedTextColor = ContextCompat.getColor(context, R.color.lib_black);
-    AttributeSet attributeSet =
-        createAttributeSet(context, withAttribute("lib_signInTextColor", "@color/lib_black"));
+    AttributeSet attributeSet = AttributeSetBuilder.from(context)
+        .addAttribute("lib_signInTextColor", "@color/lib_black")
+        .build();
 
     SignInButton signInButton = new SignInButton(context, attributeSet);
 

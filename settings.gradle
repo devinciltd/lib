@@ -1,6 +1,8 @@
+include ':lib-java-common'
 include ':lib-android'
 include ':lib-android-common'
 include ':lib-android-crashlytics'
+include ':lib-android-robolectric'
 include ':sample'
 
 rootProject.name = 'com.devinci.lib'

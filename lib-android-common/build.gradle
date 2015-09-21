@@ -10,7 +10,7 @@ android {
   buildToolsVersion configBuildToolsVersion
 
   defaultConfig {
-    minSdkVersion 15
+    minSdkVersion 9
     targetSdkVersion configTargetSdkVersion
     versionCode 1
     versionName project.version
@@ -31,6 +31,7 @@ android {
 }
 
 dependencies {
+  compile project(':lib-java-common')
   provided support.annotations
   provided dagger.dagger
 }

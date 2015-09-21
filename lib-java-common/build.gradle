@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'me.tatarka.retrolambda'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+
+project.archivesBaseName = 'java-common'
+
+configurations {
+  provided
+  testCompile.extendsFrom(provided)
+  compile.extendsFrom(provided)
+}
+
+dependencies {
+  provided support.annotations
+}
+
+task sourcesJar(type: Jar) {
+  classifier = 'sources'
+  from sourceSets.main.java.srcDirs
+}
+
+artifacts {
+  archives sourcesJar
+}
