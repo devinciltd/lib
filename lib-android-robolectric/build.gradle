@@ -15,7 +15,7 @@ configurations {
 
 dependencies {
   compile robolectric.core
-  provided jsr305
+  provided support.annotations
   provided robolectric.androidAll
 }
 

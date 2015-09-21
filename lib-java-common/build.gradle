@@ -5,7 +5,7 @@ apply plugin: 'me.tatarka.retrolambda'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 
-project.archivesBaseName = 'common'
+project.archivesBaseName = 'java-common'
 
 configurations {
   provided
@@ -14,7 +14,7 @@ configurations {
 }
 
 dependencies {
-  provided jsr305
+  provided support.annotations
 }
 
 task sourcesJar(type: Jar) {

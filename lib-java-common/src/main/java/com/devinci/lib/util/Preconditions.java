@@ -1,6 +1,6 @@
 package com.devinci.lib.util;
 
-import javax.annotation.Nullable;
+import android.support.annotation.Nullable;
 
 /**
  * Copy of Guava's Preconditions class.
