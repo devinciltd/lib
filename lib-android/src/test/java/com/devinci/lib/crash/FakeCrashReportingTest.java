@@ -1,16 +1,28 @@
 package com.devinci.lib.crash;
 
+import android.util.Log;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 
+import static com.devinci.lib.robolectric.Assertions.assertLogged;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(RobolectricGradleTestRunner.class) public class FakeCrashReportingTest {
 
-  @SuppressWarnings("ConstantConditions") @Test public void shouldNotCrashOnNullThrowable() {
+  @SuppressWarnings("ConstantConditions") @Test public void shouldLogNullThrowable() {
     FakeCrashReporting.INSTANCE.sendException(null);
+
+    assertLogged(Log.ERROR, FakeCrashReporting.class.getName(), "", null);
+  }
+
+  @SuppressWarnings("ConstantConditions") @Test public void shouldLogNullPointerException() {
+    NullPointerException expectedException = new NullPointerException();
+
+    FakeCrashReporting.INSTANCE.sendException(expectedException);
+
+    assertLogged(Log.ERROR, FakeCrashReporting.class.getName(), "", expectedException);
   }
 
   @Test public void shouldInitializeWithoutExceptions() {

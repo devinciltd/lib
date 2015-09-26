@@ -17,6 +17,7 @@ dependencies {
   compile robolectric.core
   provided support.annotations
   provided robolectric.androidAll
+  provided assertJCore
 }
 
 task sourcesJar(type: Jar) {
