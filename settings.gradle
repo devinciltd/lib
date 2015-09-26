@@ -2,6 +2,7 @@ include ':lib-java-common'
 include ':lib-android'
 include ':lib-android-common'
 include ':lib-android-crashlytics'
+include ':lib-android-dagger'
 include ':lib-android-robolectric'
 include ':sample'
 
