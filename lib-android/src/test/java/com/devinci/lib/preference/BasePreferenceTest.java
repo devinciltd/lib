@@ -46,7 +46,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
     assertThat(throwable).isExactlyInstanceOf(NullPointerException.class).hasNoCause();
   }
 
-  @Test public void shouldNotBeSet() {
+  @Test public void shouldNotBeSetInitially() {
     BooleanPreference booleanPreference =
         BooleanPreference.newInstance(sharedPreferences, "key", true);
 
