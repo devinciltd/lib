@@ -1,0 +1,59 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'jacoco-android'
+apply plugin: 'me.tatarka.retrolambda'
+
+project.archivesBaseName = 'android-dagger'
+
+android {
+  compileSdkVersion configCompileSdkVersion
+  buildToolsVersion configBuildToolsVersion
+
+  defaultConfig {
+    minSdkVersion 9
+    targetSdkVersion configTargetSdkVersion
+    versionCode 1
+    versionName project.version
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+
+  resourcePrefix 'lib_'
+}
+
+dependencies {
+  provided project(':lib-java-common')
+  provided support.annotations
+  provided dagger.dagger
+
+  testCompile assertJCore
+  testCompile junit
+  testCompile robolectric.core
+}
+
+tasks.withType(JavaCompile) {
+  options.compilerArgs << "-Xlint:unchecked"
+  options.compilerArgs << "-Xlint:deprecation"
+}
+
+task androidSourcesJar(type: Jar) {
+  classifier = 'sources'
+  from android.sourceSets.main.java.srcDirs
+}
+
+artifacts {
+  archives androidSourcesJar
+}
+
+jacocoAndroidUnitTestReport {
+  excludes = jacocoExcludes
+}

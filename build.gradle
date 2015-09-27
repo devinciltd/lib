@@ -44,9 +44,9 @@ ext {
   jsr205 = 'javax.annotation:jsr250-api:1.0'
 
   assertJAndroidVersion = '1.1.0'
-  assertJAndroid =
-      [design: "com.squareup.assertj:assertj-android-design:$assertJAndroidVersion@aar"]
-  assertJCore = 'org.assertj:assertj-core:1.7.1'
+  assertJAndroid = [core  : "com.squareup.assertj:assertj-android:$assertJAndroidVersion",
+                    design: "com.squareup.assertj:assertj-android-design:$assertJAndroidVersion@aar"]
+  assertJCore = 'org.assertj:assertj-core:2.2.0'
   junit = 'junit:junit:4.12'
   mockitoCore = 'org.mockito:mockito-core:1.10.19'
   robolectric = [core      : 'org.robolectric:robolectric:3.0',
