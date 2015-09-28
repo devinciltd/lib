@@ -3,6 +3,7 @@ package com.devinci.lib.crash;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 /**
  * Crash reporting implementation that does nothing.
@@ -15,7 +16,7 @@ public enum FakeCrashReporting implements CrashReporting {
   }
 
   @Override public void sendException(@NonNull Throwable throwable) {
-    // Does nothing intentionally
+    Log.e(FakeCrashReporting.class.getName(), "", throwable);
   }
 
   @NonNull @Override public CrashReporting addExtra(@NonNull String key, boolean extra) {
