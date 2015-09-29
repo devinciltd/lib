@@ -22,11 +22,11 @@ abstract class BasePreference<T> {
     this.defaultValue = defaultValue;
   }
 
-  public final boolean isSet() {
+  public boolean isSet() {
     return sharedPreferences.contains(key);
   }
 
-  @SuppressLint("CommitPrefEdits") public final void set(T value) {
+  @SuppressLint("CommitPrefEdits") public void set(T value) {
     SharedPreferences.Editor editor = sharedPreferences.edit();
     putValue(value, editor);
     if (commit) {
@@ -36,7 +36,7 @@ abstract class BasePreference<T> {
     }
   }
 
-  @SuppressLint("CommitPrefEdits") public final void delete() {
+  @SuppressLint("CommitPrefEdits") public void delete() {
     SharedPreferences.Editor editor = sharedPreferences.edit().remove(key);
     if (commit) {
       editor.commit();
