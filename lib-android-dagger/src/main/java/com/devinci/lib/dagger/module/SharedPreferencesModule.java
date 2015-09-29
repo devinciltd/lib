@@ -1,4 +1,4 @@
-package com.devinci.lib.dagger;
+package com.devinci.lib.dagger.module;
 
 import android.app.Application;
 import android.content.SharedPreferences;
