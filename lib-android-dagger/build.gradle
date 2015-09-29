@@ -37,6 +37,7 @@ dependencies {
 
   testCompile assertJCore
   testCompile junit
+  testCompile mockitoCore
   testCompile robolectric.core
 }
 
