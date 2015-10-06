@@ -41,5 +41,5 @@ dependencies {
   compile support.appCompat
   compile dagger.dagger
   apt dagger.compiler
-  provided jsr205
+  provided jsr250
 }

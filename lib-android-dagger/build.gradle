@@ -36,7 +36,7 @@ dependencies {
   provided support.annotations
   provided dagger.dagger
   apt dagger.compiler
-  provided jsr205
+  provided jsr250
 
   testCompile assertJCore
   testCompile junit
