@@ -26,7 +26,7 @@ abstract class BasePreference<T> {
     return sharedPreferences.contains(key);
   }
 
-  @SuppressLint("CommitPrefEdits") public void set(T value) {
+  @SuppressLint("CommitPrefEdits") public void set(@Nullable T value) {
     SharedPreferences.Editor editor = sharedPreferences.edit();
     putValue(value, editor);
     if (commit) {

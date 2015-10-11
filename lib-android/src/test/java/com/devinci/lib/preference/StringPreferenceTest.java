@@ -11,7 +11,6 @@ import org.robolectric.RuntimeEnvironment;
 import org.robolectric.shadows.ShadowPreferenceManager;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
@@ -31,11 +30,13 @@ import static org.mockito.MockitoAnnotations.initMocks;
     given(mockEditor.remove(anyString())).willReturn(mockEditor);
   }
 
-  @Test public void shouldThrowOnNullDefaultValue() {
-    Throwable throwable =
-        catchThrowable(() -> StringPreference.newInstance(mockSharedPreferences, "key", null));
+  @Test public void shouldReturnDefaultNullValue() {
+    StringPreference stringPreference =
+        StringPreference.newInstance(mockSharedPreferences, "key", null);
 
-    assertThat(throwable).isExactlyInstanceOf(NullPointerException.class).hasNoCause();
+    String value = stringPreference.get();
+
+    assertThat(value).isNull();
   }
 
   @SuppressLint("CommitPrefEdits") @Test public void shouldApplySetOperationByDefault() {
@@ -88,5 +89,16 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
     assertThat(stringPreference.isSet()).isTrue();
     assertThat(stringPreference.get()).isEqualTo(newValue);
+  }
+
+  @Test public void shouldNotBeSetWhenNewValueIsNull() {
+    StringPreference stringPreference =
+        StringPreference.newInstance(sharedPreferences, "key", null);
+    stringPreference.set("old_value");
+
+    stringPreference.set(null);
+
+    assertThat(stringPreference.isSet()).isFalse();
+    assertThat(stringPreference.get()).isNull();
   }
 }
