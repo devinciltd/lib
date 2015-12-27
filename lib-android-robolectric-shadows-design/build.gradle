@@ -1,9 +1,11 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'android-apt'
 apply plugin: 'jacoco-android'
 apply plugin: 'me.tatarka.retrolambda'
+apply from: fixMissingResourceClasses
 
-project.archivesBaseName = 'android-common'
+project.archivesBaseName = 'android-robolectric-shadows-design'
 
 android {
   compileSdkVersion configCompileSdkVersion
@@ -13,40 +15,37 @@ android {
     minSdkVersion configMinSdkVersion
   }
 
-  buildTypes {
-    release {
-      minifyEnabled false
-    }
-  }
-
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
-
-  resourcePrefix 'lib_'
 }
 
 dependencies {
-  compile project(':lib-java-common')
-  provided support.annotations
-  provided dagger.dagger
+  provided robolectric.core
+  apt robolectric.processor
+  compile support.design
+
+  testCompile assertJAndroid.design
+  testCompile assertJCore
+  testCompile junit
 }
 
-tasks.withType(JavaCompile) {
-  options.compilerArgs << "-Xlint:unchecked"
-  options.compilerArgs << "-Xlint:deprecation"
+apt {
+  arguments {
+    'org.robolectric.annotation.processing.shadowPackage' 'com.devinci.lib.robolectric.shadows.design'
+  }
 }
 
-task androidSourcesJar(type: Jar) {
+task sourcesJar(type: Jar) {
   classifier = 'sources'
   from android.sourceSets.main.java.srcDirs
 }
 
 artifacts {
-  archives androidSourcesJar
+  archives sourcesJar
 }
 
-jacocoAndroidUnitTestReport {
-  excludes += jacocoExcludes
+afterEvaluate {
+  ['android.support.design'].each generateMissingResourceClass
 }

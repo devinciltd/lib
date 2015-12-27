@@ -3,7 +3,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'android-apt'
 apply plugin: 'jacoco-android'
 apply plugin: 'me.tatarka.retrolambda'
-apply from: rootProject.file(fixMissingResourceClasses)
+apply from: fixMissingResourceClasses
 
 project.archivesBaseName = 'android'
 
@@ -36,6 +36,11 @@ android {
   testBuildType "debug"
 
   useLibrary 'org.apache.http.legacy'
+
+  lintOptions {
+    textReport = true
+    textOutput 'stdout'
+  }
 }
 
 dependencies {
@@ -75,7 +80,7 @@ artifacts {
 }
 
 jacocoAndroidUnitTestReport {
-  excludes = jacocoExcludes
+  excludes += jacocoExcludes
 }
 
 afterEvaluate {
