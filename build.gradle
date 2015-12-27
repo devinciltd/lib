@@ -63,3 +63,4 @@ allprojects {
 
   project.version = scmVersion.version
 }
+
