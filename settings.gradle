@@ -4,6 +4,7 @@ include ':lib-android-common'
 include ':lib-android-crashlytics'
 include ':lib-android-dagger'
 include ':lib-android-robolectric'
+include ':lib-android-robolectric-shadows-design'
 include ':sample'
 
 rootProject.name = 'com.devinci.lib'
